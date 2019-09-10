@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<views:BasePage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:views="clr-namespace:FreeWeatherApp.Views;assembly=FreeWeatherApp"
+    xmlns:viewModels="clr-namespace:FreeWeatherApp.ViewModels;assembly=FreeWeatherApp"
+    xmlns:localization="clr-namespace:FreeWeatherApp.Helpers.Localization;assembly=FreeWeatherApp"
+    mc:Ignorable="d"
+    x:Class="FreeWeatherApp.Views.WeekForecastPage"
+    x:Name="Page">
+
+    <views:BasePage.BindingContext>
+        <viewModels:WeekForecastViewModel x:Name="ViewModel" />
+    </views:BasePage.BindingContext>
+
+    <views:BasePage.Content>
+        <CollectionView ItemsSource="{Binding WeekForecastData}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout
+                    Orientation="Horizontal"
+                    SnapPointsAlignment="Center"
+                    SnapPointsType="Mandatory" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{Binding Source={x:Reference Page}, Path=ScreenWidth}" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid
+                            RowSpacing="0"
+                            ColumnSpacing="0"
+                            BackgroundColor="CornflowerBlue">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.4*" />
+                                <RowDefinition Height="0.2*" />
+                                <RowDefinition Height="0.2*" />
+                                <RowDefinition Height="0.2*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image
+                                Source="img10.png"
+                                Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="4" />
+
+                            <StackLayout
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="3"
+                                BackgroundColor="Yellow" />
+
+                            <StackLayout
+                                Grid.Row="1"
+                                Grid.Column="3"
+                                BackgroundColor="OrangeRed" />
+
+                            <StackLayout
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                BackgroundColor="DarkOliveGreen" />
+
+                            <StackLayout
+                                Grid.Row="2"
+                                Grid.Column="2"
+                                Grid.ColumnSpan="2"
+                                BackgroundColor="Violet" />
+
+                            <StackLayout
+                                Grid.Row="3"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                BackgroundColor="Blue" />
+
+                            <StackLayout
+                                Grid.Row="3"
+                                Grid.Column="2"
+                                Grid.ColumnSpan="2"
+                                BackgroundColor="Olive" />
+                        </Grid>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.EmptyView>
+                <Label
+                    Text="Empty list"
+                    VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="CenterAndExpand"
+                    TextColor="Yellow"
+                    FontSize="Large"
+                    BackgroundColor="Red" />
+            </CollectionView.EmptyView>
+        </CollectionView>
+    </views:BasePage.Content>
+</views:BasePage>

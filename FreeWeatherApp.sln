@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeWeatherApp.Android", "F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeWeatherApp.iOS", "FreeWeatherApp.iOS\FreeWeatherApp.iOS.csproj", "{81E1F9ED-3733-413F-9357-0C34DFC0FDDA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeWeatherApp", "FreeWeatherApp\FreeWeatherApp.csproj", "{42F0553F-8C3B-41F8-84B5-53FD4BA50EE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeWeatherApp", "FreeWeatherApp\FreeWeatherApp.csproj", "{42F0553F-8C3B-41F8-84B5-53FD4BA50EE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
