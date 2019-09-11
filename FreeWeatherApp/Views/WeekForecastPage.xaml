@@ -16,6 +16,22 @@
         <viewModels:WeekForecastViewModel x:Name="ViewModel" />
     </views:BasePage.BindingContext>
 
+    <views:BasePage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label" x:Key="TempTitleLabelStyle">
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="TextDecorations" Value="Underline" />
+            </Style>
+
+            <Style TargetType="Label" x:Key="TempValueLabelStyle">
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+        </ResourceDictionary>
+    </views:BasePage.Resources>
+
     <views:BasePage.Content>
         <CollectionView ItemsSource="{Binding WeekForecastData}">
             <CollectionView.ItemsLayout>
@@ -27,70 +43,322 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
+                    <!--todo [Bug] CollectionView item is not stretched across the width of the screen-->
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="{Binding Source={x:Reference Page}, Path=ScreenWidth}" />
                         </Grid.ColumnDefinitions>
 
-                        <Grid
-                            RowSpacing="0"
-                            ColumnSpacing="0"
-                            BackgroundColor="CornflowerBlue">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="0.4*" />
-                                <RowDefinition Height="0.2*" />
-                                <RowDefinition Height="0.2*" />
-                                <RowDefinition Height="0.2*" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
+                        <ScrollView>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
 
-                            <Image
-                                Source="img10.png"
-                                Grid.Row="0"
-                                Grid.RowSpan="2"
-                                Grid.Column="0"
-                                Grid.ColumnSpan="4" />
+                                <Image
+                                    Source="template_weather_img1.png"
+                                    Grid.Row="0"
+                                    Grid.RowSpan="2"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
 
-                            <StackLayout
-                                Grid.Row="1"
-                                Grid.Column="0"
-                                Grid.ColumnSpan="3"
-                                BackgroundColor="Yellow" />
+                                <Label
+                                    Text="{Binding DateTime, StringFormat='{}{0:d.M.yyyy}'}"
+                                    Style="{StaticResource TempValueLabelStyle}"
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
 
-                            <StackLayout
-                                Grid.Row="1"
-                                Grid.Column="3"
-                                BackgroundColor="OrangeRed" />
+                                <Label
+                                    Text="{Binding Summary}"
+                                    Style="{StaticResource TempValueLabelStyle}"
+                                    VerticalOptions="End"
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
 
-                            <StackLayout
-                                Grid.Row="2"
-                                Grid.Column="0"
-                                Grid.ColumnSpan="2"
-                                BackgroundColor="DarkOliveGreen" />
+                                <Label
+                                    Text="Cloud Cover"
+                                    Style="{StaticResource TempTitleLabelStyle}"
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
 
-                            <StackLayout
-                                Grid.Row="2"
-                                Grid.Column="2"
-                                Grid.ColumnSpan="2"
-                                BackgroundColor="Violet" />
+                                <Label
+                                    Text="{Binding CloudCover}"
+                                    Style="{StaticResource TempValueLabelStyle}"
+                                    Grid.Row="3"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
 
-                            <StackLayout
-                                Grid.Row="3"
-                                Grid.Column="0"
-                                Grid.ColumnSpan="2"
-                                BackgroundColor="Blue" />
+                                <Label
+                                    Text="Apparent Temperature"
+                                    Style="{StaticResource TempTitleLabelStyle}"
+                                    Grid.Row="4"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
 
-                            <StackLayout
-                                Grid.Row="3"
-                                Grid.Column="2"
-                                Grid.ColumnSpan="2"
-                                BackgroundColor="Olive" />
-                        </Grid>
+                                <Label
+                                    Text="Low"
+                                    Style="{StaticResource TempTitleLabelStyle}"
+                                    Grid.Row="5"
+                                    Grid.Column="0" />
+
+                                <Label
+                                    Text="{Binding ApparentTemperatureLow}"
+                                    Style="{StaticResource TempValueLabelStyle}"
+                                    Grid.Row="6"
+                                    Grid.Column="0"/>
+
+                                <Label
+                                    Text="High"
+                                    Style="{StaticResource TempTitleLabelStyle}"
+                                    Grid.Row="5"
+                                    Grid.Column="1" />
+
+                                <Label
+                                    Text="{Binding ApparentTemperatureHigh}"
+                                    Style="{StaticResource TempValueLabelStyle}"
+                                    Grid.Row="6"
+                                    Grid.Column="1"/>
+
+                                <Label
+                                    Text="Humidity"
+                                    Style="{StaticResource TempTitleLabelStyle}"
+                                    Grid.Row="7"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
+
+                                <Label
+                                    Text="{Binding Humidity}"
+                                    Style="{StaticResource TempValueLabelStyle}"
+                                    Grid.Row="8"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
+
+                                <Label
+                                    Text="Dew point"
+                                    Style="{StaticResource TempTitleLabelStyle}"
+                                    Grid.Row="9"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
+
+                                <Label
+                                    Text="{Binding DewPoint}"
+                                    Style="{StaticResource TempValueLabelStyle}"
+                                    Grid.Row="10"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
+
+                                <Label
+                                    Text="Ozone"
+                                    Style="{StaticResource TempTitleLabelStyle}"
+                                    Grid.Row="11"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
+
+                                <Label
+                                    Text="{Binding Ozone}"
+                                    Style="{StaticResource TempValueLabelStyle}"
+                                    Grid.Row="12"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
+
+                                <Label
+                                    Text="Precip Intensity"
+                                    Style="{StaticResource TempTitleLabelStyle}"
+                                    Grid.Row="13"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
+
+                                <Label
+                                    Text="{Binding PrecipIntensity}"
+                                    Style="{StaticResource TempValueLabelStyle}"
+                                    Grid.Row="14"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
+
+                                <Label
+                                    Text="Precip Probability"
+                                    Style="{StaticResource TempTitleLabelStyle}"
+                                    Grid.Row="15"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
+
+                                <Label
+                                    Text="{Binding PrecipProbability}"
+                                    Style="{StaticResource TempValueLabelStyle}"
+                                    Grid.Row="16"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
+
+                                <Label
+                                    Text="Precip Type"
+                                    Style="{StaticResource TempTitleLabelStyle}"
+                                    Grid.Row="17"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
+
+                                <Label
+                                    Text="{Binding PrecipType}"
+                                    Style="{StaticResource TempValueLabelStyle}"
+                                    Grid.Row="18"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
+
+                                <Label
+                                    Text="Pressure"
+                                    Style="{StaticResource TempTitleLabelStyle}"
+                                    Grid.Row="19"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
+
+                                <Label
+                                    Text="{Binding Pressure}"
+                                    Style="{StaticResource TempValueLabelStyle}"
+                                    Grid.Row="20"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
+
+                                <Label
+                                    Text="Temperature"
+                                    Style="{StaticResource TempTitleLabelStyle}"
+                                    Grid.Row="21"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
+
+                                <Label
+                                    Text="Low"
+                                    Style="{StaticResource TempTitleLabelStyle}"
+                                    Grid.Row="22"
+                                    Grid.Column="0" />
+
+                                <Label
+                                    Text="{Binding TemperatureLow}"
+                                    Style="{StaticResource TempValueLabelStyle}"
+                                    Grid.Row="23"
+                                    Grid.Column="0"/>
+
+                                <Label
+                                    Text="High"
+                                    Style="{StaticResource TempTitleLabelStyle}"
+                                    Grid.Row="22"
+                                    Grid.Column="1" />
+
+                                <Label
+                                    Text="{Binding TemperatureHigh}"
+                                    Style="{StaticResource TempValueLabelStyle}"
+                                    Grid.Row="23"
+                                    Grid.Column="1"/>
+
+                                <Label
+                                    Text="Uv-index"
+                                    Style="{StaticResource TempTitleLabelStyle}"
+                                    Grid.Row="24"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
+
+                                <Label
+                                    Text="{Binding UvIndex}"
+                                    Style="{StaticResource TempValueLabelStyle}"
+                                    Grid.Row="25"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
+
+                                <Label
+                                    Text="Visibility"
+                                    Style="{StaticResource TempTitleLabelStyle}"
+                                    Grid.Row="26"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
+
+                                <Label
+                                    Text="{Binding Visibility}"
+                                    Style="{StaticResource TempValueLabelStyle}"
+                                    Grid.Row="27"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
+
+                                <Label
+                                    Text="Wind Bearing"
+                                    Style="{StaticResource TempTitleLabelStyle}"
+                                    Grid.Row="28"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
+
+                                <Label
+                                    Text="{Binding WindBearing}"
+                                    Style="{StaticResource TempValueLabelStyle}"
+                                    Grid.Row="29"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
+
+                                <Label
+                                    Text="Wind Gust"
+                                    Style="{StaticResource TempTitleLabelStyle}"
+                                    Grid.Row="30"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
+
+                                <Label
+                                    Text="{Binding WindGust}"
+                                    Style="{StaticResource TempValueLabelStyle}"
+                                    Grid.Row="31"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
+
+                                <Label
+                                    Text="Wind Speed"
+                                    Style="{StaticResource TempTitleLabelStyle}"
+                                    Grid.Row="32"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
+
+                                <Label
+                                    Text="{Binding WindSpeed}"
+                                    Style="{StaticResource TempValueLabelStyle}"
+                                    Grid.Row="33"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" />
+                            </Grid>
+                        </ScrollView>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

@@ -35,8 +35,5 @@
     <EmbeddedResource Update="Views\WeekForecastPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Page2.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
   </ItemGroup>
 </Project>
