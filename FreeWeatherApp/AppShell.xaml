@@ -39,6 +39,16 @@
     </FlyoutItem>-->
 
     <FlyoutItem
+        Route="today_forecast"
+        Title="TodayForecast">
+        <Tab>
+            <ShellContent>
+                <views:TodayForecastPage />
+            </ShellContent>
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem
         Route="week_forecast"
         Title="WeekForecast">
         <Tab>

@@ -1,4 +1,5 @@
-﻿using FreeWeatherApp.Models;
+﻿using FreeWeatherApp.Enums;
+using FreeWeatherApp.Models;
 using FreeWeatherApp.Models.DarkSky;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,6 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using FreeWeatherApp.Enums;
 
 namespace FreeWeatherApp.Services.DarkSky
 {
@@ -41,6 +41,30 @@ namespace FreeWeatherApp.Services.DarkSky
             {
                 BaseAddress = new Uri(BaseApiAddress)
             };
+        }
+
+        public async Task<ResponseModel<Forecast>> GetTodayForecastAsync(
+            double latitude,
+            double longitude,
+            LanguageCode languageCode,
+            MeasurementUnit measurementUnit)
+        {
+            var parameters = new OptionalParameters
+            {
+                ExtendHourly = true,
+                LanguageCode = languageCode,
+                MeasurementUnit = measurementUnit,
+                DataBlocksToExclude = new List<ExclusionBlock>
+                {
+                    ExclusionBlock.Alerts,
+                    ExclusionBlock.Flags,
+                    ExclusionBlock.Minutely,
+                    ExclusionBlock.Hourly,
+                    ExclusionBlock.Daily
+                }
+            };
+
+            return await GetAsync<Forecast>(BuildRequestUri(latitude, longitude, parameters));
         }
 
         public async Task<ResponseModel<Forecast>> GetWeekForecastAsync(
