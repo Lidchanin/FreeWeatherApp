@@ -136,4 +136,7 @@
       <Name>FreeWeatherApp</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\template_weather_img1.png" />
+  </ItemGroup>
 </Project>
