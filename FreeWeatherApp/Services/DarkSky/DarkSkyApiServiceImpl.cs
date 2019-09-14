@@ -51,7 +51,7 @@ namespace FreeWeatherApp.Services.DarkSky
         {
             var parameters = new OptionalParameters
             {
-                ExtendHourly = true,
+                ExtendHourly = false,
                 LanguageCode = languageCode,
                 MeasurementUnit = measurementUnit,
                 DataBlocksToExclude = new List<ExclusionBlock>
@@ -75,7 +75,7 @@ namespace FreeWeatherApp.Services.DarkSky
         {
             var parameters = new OptionalParameters
             {
-                ExtendHourly = true,
+                ExtendHourly = false,
                 LanguageCode = languageCode,
                 MeasurementUnit = measurementUnit,
                 DataBlocksToExclude = new List<ExclusionBlock>
