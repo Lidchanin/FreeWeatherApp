@@ -139,4 +139,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\template_weather_img1.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\template_weather_img1_thumbnail.png" />
+  </ItemGroup>
 </Project>

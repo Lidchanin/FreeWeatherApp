@@ -43,6 +43,30 @@ namespace FreeWeatherApp.Services.DarkSky
             };
         }
 
+        public async Task<ResponseModel<Forecast>> GetHourlyForecastAsync(
+            double latitude,
+            double longitude,
+            LanguageCode languageCode,
+            MeasurementUnit measurementUnit)
+        {
+            var parameters = new OptionalParameters
+            {
+                ExtendHourly = false,
+                LanguageCode = languageCode,
+                MeasurementUnit = measurementUnit,
+                DataBlocksToExclude = new List<ExclusionBlock>
+                {
+                    ExclusionBlock.Alerts,
+                    ExclusionBlock.Flags,
+                    ExclusionBlock.Minutely,
+                    ExclusionBlock.Currently,
+                    ExclusionBlock.Daily
+                }
+            };
+
+            return await GetAsync<Forecast>(BuildRequestUri(latitude, longitude, parameters));
+        }
+
         public async Task<ResponseModel<Forecast>> GetTodayForecastAsync(
             double latitude,
             double longitude,
