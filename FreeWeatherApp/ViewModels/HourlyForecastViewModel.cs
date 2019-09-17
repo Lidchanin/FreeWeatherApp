@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using FreeWeatherApp.Enums;
+﻿using FreeWeatherApp.Enums;
 using FreeWeatherApp.Models.DarkSky;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;

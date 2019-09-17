@@ -3,8 +3,9 @@
 <Shell
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:localization="clr-namespace:FreeWeatherApp.Helpers.Localization;assembly=FreeWeatherApp"
     xmlns:views="clr-namespace:FreeWeatherApp.Views;assembly=FreeWeatherApp"
     mc:Ignorable="d"
     FlyoutHeaderBehavior="CollapseOnScroll"
@@ -13,7 +14,7 @@
     <Shell.FlyoutHeader>
         <Grid HeightRequest="300">
             <Label
-                Text="Free Weather App"
+                Text="{Binding Source={x:Static localization:LocalizationHelper.Current}, Path=AppName}"
                 TextColor="Black"
                 FontSize="48"
                 HorizontalOptions="Center"
@@ -23,24 +24,9 @@
         </Grid>
     </Shell.FlyoutHeader>
 
-    <!--<FlyoutItem 
-            Route="weather"
-            Title="Weather">
-        <Tab>
-            <ShellContent Route="today"
-                          Title="Today">
-                <views:WeekForecastPage />
-            </ShellContent>
-            <ShellContent Route="tomorrow"
-                          Title="Tomorrow">
-                <views:Page2 />
-            </ShellContent>
-        </Tab>
-    </FlyoutItem>-->
-
     <FlyoutItem
         Route="hourly_forecast"
-        Title="HourlyForecast">
+        Title="{Binding Source={x:Static localization:LocalizationHelper.Current}, Path=HourlyForecast}">
         <Tab>
             <ShellContent>
                 <views:HourlyForecastPage />
@@ -50,7 +36,7 @@
 
     <FlyoutItem
         Route="today_forecast"
-        Title="TodayForecast">
+        Title="{Binding Source={x:Static localization:LocalizationHelper.Current}, Path=TodayForecast}">
         <Tab>
             <ShellContent>
                 <views:TodayForecastPage />
@@ -60,7 +46,7 @@
 
     <FlyoutItem
         Route="week_forecast"
-        Title="WeekForecast">
+        Title="{Binding Source={x:Static localization:LocalizationHelper.Current}, Path=WeekForecast}">
         <Tab>
             <ShellContent>
                 <views:WeekForecastPage />
@@ -69,8 +55,8 @@
     </FlyoutItem>
 
     <FlyoutItem
-        Route="options"
-        Title="Options">
+        Route="settings"
+        Title="{Binding Source={x:Static localization:LocalizationHelper.Current}, Path=Settings}">
         <Tab>
             <ShellContent>
                 <views:OptionsPage />
@@ -80,7 +66,7 @@
 
     <FlyoutItem
         Route="credits"
-        Title="Credits">
+        Title="{Binding Source={x:Static localization:LocalizationHelper.Current}, Path=Credits}">
         <Tab>
             <ShellContent>
                 <views:CreditsPage />

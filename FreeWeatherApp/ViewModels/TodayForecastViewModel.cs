@@ -1,6 +1,5 @@
 ﻿using FreeWeatherApp.Enums;
 using FreeWeatherApp.Models.DarkSky;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 
@@ -27,7 +26,7 @@ namespace FreeWeatherApp.ViewModels
 
             if (response.IsSuccess)
             {
-                ForecastData = response?.Model?.Currently;
+                ForecastData = response.Model?.Currently;
             }
         }
     }

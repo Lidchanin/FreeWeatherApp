@@ -115,61 +115,6 @@ namespace FreeWeatherApp.Services.DarkSky
             return await GetAsync<Forecast>(BuildRequestUri(latitude, longitude, parameters));
         }
 
-        public Task<ResponseModel<Forecast>> StabGetWeekForecastAsync(
-            double latitude,
-            double longitude,
-            LanguageCode languageCode,
-            MeasurementUnit measurementUnit)
-        {
-            var dataPoints = new List<DataPoint>(8);
-
-            for (var i = 0; i < dataPoints.Capacity; i++)
-            {
-                dataPoints.Add(new DataPoint
-                {
-                    Icon = (Icon) i,
-                    ApparentTemperatureHigh = 30 + i,
-                    ApparentTemperatureLow = 15 + i,
-                    CloudCover = 50 + i,
-                    Humidity = 75 + i,
-                    DewPoint = 14.8 + i,
-                    MoonPhase = 0.13 + i * 0.1,
-                    Ozone = 276.2 + i,
-                    PrecipIntensity = 0.1721 + i * 0.01,
-                    PrecipIntensityMax = 1.5744 + i * 0.5,
-                    PrecipProbability = 0.58 + i * 0.3,
-                    PrecipType = PrecipitationType.Rain,
-                    Pressure = 1014.34 + i * 10,
-                    Summary = $"DataPoint summary {i}",
-                    TemperatureHigh = 35 + i,
-                    TemperatureLow = 15 - i,
-                    UvIndex = 1,
-                    Visibility = 300 + i * 3.5,
-                    WindBearing = 286 + i * 3,
-                    WindGust = 12.66 + i * 0.05,
-                    WindSpeed = 4.46 + i * 0.1
-                });
-            }
-
-            var weekForecast = new Forecast
-            {
-                Daily = new DataBlock
-                {
-                    Summary = "DataBlock Summary",
-                    Icon = Icon.Fog,
-                    Data = dataPoints
-                }
-            };
-
-            var response = new ResponseModel<Forecast>
-            {
-                IsSuccess = true,
-                Model = weekForecast
-            };
-
-            return Task.Factory.StartNew(() => response);
-        }
-
         private static string BuildRequestUri(double latitude, double longitude, OptionalParameters parameters)
         {
             var queryString =

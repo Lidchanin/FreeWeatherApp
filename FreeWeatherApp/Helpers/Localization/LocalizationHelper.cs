@@ -8,7 +8,7 @@ namespace FreeWeatherApp.Helpers.Localization
     {
         public static Language Current { get; private set; } = new EnglishLanguage();
 
-        public static void SetLanguage(LanguageCode code) => 
+        public static void SetLanguage(LanguageCode code) =>
             Current = GetLanguageByCode(code);
 
         private static Language GetLanguageByCode(LanguageCode code)

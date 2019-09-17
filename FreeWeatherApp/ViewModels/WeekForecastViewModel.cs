@@ -24,9 +24,6 @@ namespace FreeWeatherApp.ViewModels
                 location.Longitude,
                 LanguageCode.Ru,
                 MeasurementUnit.Si);
-            //todo [StabData] Week Forecast
-            //var response = await DarkSkyApiService.StabGetWeekForecastAsync(53.6522761, 23.8430957,
-            //    LanguageCode.Ru, MeasurementUnit.Si);
 
             if (response.IsSuccess)
             {
