@@ -2,6 +2,9 @@
 {
     public sealed class EnglishLanguage : Language
     {
+        public override string Next48HoursTitle { get; } = "Next 48 hours";
+        public override string TodayForecastTitle { get; } = "Today";
+        public override string WeekForecastTitle { get; } = "Week";
         public override string Forecast { get; } = "Forecast";
         public override string HourlyForecast { get; } = "Hourly Forecast";
         public override string TodayForecast { get; } = "Today Forecast";

@@ -3,12 +3,14 @@
 <views:BasePage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:views="clr-namespace:FreeWeatherApp.Views;assembly=FreeWeatherApp"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:localization="clr-namespace:FreeWeatherApp.Helpers.Localization;assembly=FreeWeatherApp"
     xmlns:viewModels="clr-namespace:FreeWeatherApp.ViewModels;assembly=FreeWeatherApp"
+    xmlns:views="clr-namespace:FreeWeatherApp.Views;assembly=FreeWeatherApp"
     mc:Ignorable="d"
-    x:Class="FreeWeatherApp.Views.HourlyForecastPage">
+    x:Class="FreeWeatherApp.Views.HourlyForecastPage"
+    Title="{Binding Source={x:Static localization:LocalizationHelper.Current}, Path=Next48HoursTitle}">
 
     <views:BasePage.BindingContext>
         <viewModels:HourlyForecastViewModel x:Name="ViewModel" />
@@ -25,32 +27,40 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <FlexLayout Direction="Row"
-                                JustifyContent="SpaceEvenly"
-                                Wrap="Wrap">
-                        <Label Text="{Binding DateTime, StringFormat='{}{0:d/M/yyyy _ hh:mm}'}" 
-                               FlexLayout.AlignSelf="Center"/>
-                        <Label Text="{Binding ApparentTemperature, StringFormat='ApparentTemperature = {0}   '}" />
-                        <Label Text="{Binding CloudCover, StringFormat='CloudCover = {0}   '}" />
-                        <Label Text="{Binding DewPoint, StringFormat='DevPoint = {0}   '}" />
-                        <Label Text="{Binding Humidity, StringFormat='Humidity = {0}   '}" />
-                        <Label Text="{Binding Ozone, StringFormat='Ozone = {0}   '}" />
-                        <Label Text="{Binding PrecipIntensity, StringFormat='PrecipIntensity = {0}   '}" />
-                        <Label Text="{Binding PrecipProbability, StringFormat='PrecipProbability = {0}   '}" />
-                        <Label Text="{Binding PrecipType, StringFormat='PrecipType = {0}   '}" />
-                        <Label Text="{Binding Pressure, StringFormat='Pressure = {0}   '}" />
-                        <Label Text="{Binding Summary, StringFormat='Summary = {0}   '}" />
-                        <Label Text="{Binding Temperature, StringFormat='Temperature = {0}   '}" />
-                        <Label Text="{Binding UvIndex, StringFormat='UvIndex = {0}   '}" />
-                        <Label Text="{Binding Visibility, StringFormat='Visibility = {0}   '}" />
-                        <Label Text="{Binding WindBearing, StringFormat='WindBearing = {0}   '}" />
-                        <Label Text="{Binding WindGust, StringFormat='WindGust = {0}   '}" />
-                        <Label Text="{Binding WindSpeed, StringFormat='WindSpeed = {0}   '}" />
-                        <Image 
+                    <StackLayout>
+                        <FlexLayout
+                            Direction="Row"
+                            JustifyContent="SpaceEvenly"
+                            AlignItems="Stretch"
+                            Wrap="Wrap">
+                            <Label Text="{Binding DateTime, StringFormat='{}{0:d/M/yyyy _ hh:mm}'}" />
+                            <Label Text="{Binding ApparentTemperature, StringFormat='ApparentTemperature = {0}   '}" />
+                            <Label Text="{Binding CloudCover, StringFormat='CloudCover = {0}   '}" />
+                            <Label Text="{Binding DewPoint, StringFormat='DevPoint = {0}   '}" />
+                            <Label Text="{Binding Humidity, StringFormat='Humidity = {0}   '}" />
+                            <Label Text="{Binding Ozone, StringFormat='Ozone = {0}   '}" />
+                            <Label Text="{Binding PrecipIntensity, StringFormat='PrecipIntensity = {0}   '}" />
+                            <Label Text="{Binding PrecipProbability, StringFormat='PrecipProbability = {0}   '}" />
+                            <Label Text="{Binding PrecipType, StringFormat='PrecipType = {0}   '}" />
+                            <Label Text="{Binding Pressure, StringFormat='Pressure = {0}   '}" />
+                            <Label Text="{Binding Summary, StringFormat='Summary = {0}   '}" />
+                            <Label Text="{Binding Temperature, StringFormat='Temperature = {0}   '}" />
+                            <Label Text="{Binding UvIndex, StringFormat='UvIndex = {0}   '}" />
+                            <Label Text="{Binding Visibility, StringFormat='Visibility = {0}   '}" />
+                            <Label Text="{Binding WindBearing, StringFormat='WindBearing = {0}   '}" />
+                            <Label Text="{Binding WindGust, StringFormat='WindGust = {0}   '}" />
+                            <Label Text="{Binding WindSpeed, StringFormat='WindSpeed = {0}   '}" />
+                        </FlexLayout>
+
+                        <Image
                             HeightRequest="100"
                             WidthRequest="100"
-                            Source="template_weather_img1_thumbnail.png"></Image>
-                    </FlexLayout>
+                            Source="template_weather_img1_thumbnail.png" />
+
+                        <BoxView
+                            HeightRequest="1"
+                            BackgroundColor="Black" />
+                    </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

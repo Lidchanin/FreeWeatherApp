@@ -2,6 +2,9 @@
 {
     public sealed class RussianLanguage : Language
     {
+        public override string Next48HoursTitle { get; } = "Следующие 48 часов";
+        public override string TodayForecastTitle { get; } = "Сегодня";
+        public override string WeekForecastTitle { get; } = "Неделя";
         public override string Forecast { get; } = "Прогноз";
         public override string HourlyForecast { get; } = "Почасовой прогноз";
         public override string TodayForecast { get; } = "Прогноз на сегодня";

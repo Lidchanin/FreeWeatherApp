@@ -7,9 +7,11 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:views="clr-namespace:FreeWeatherApp.Views;assembly=FreeWeatherApp"
     xmlns:viewModels="clr-namespace:FreeWeatherApp.ViewModels;assembly=FreeWeatherApp"
+    xmlns:localization="clr-namespace:FreeWeatherApp.Helpers.Localization;assembly=FreeWeatherApp"
     mc:Ignorable="d"
     x:Class="FreeWeatherApp.Views.WeekForecastPage"
-    x:Name="Page">
+    x:Name="Page"
+    Title="{Binding Source={x:Static localization:LocalizationHelper.Current}, Path=WeekForecastTitle}">
 
     <views:BasePage.BindingContext>
         <viewModels:WeekForecastViewModel x:Name="ViewModel" />
