@@ -9,8 +9,7 @@
     xmlns:viewModels="clr-namespace:FreeWeatherApp.ViewModels;assembly=FreeWeatherApp"
     xmlns:views="clr-namespace:FreeWeatherApp.Views;assembly=FreeWeatherApp"
     mc:Ignorable="d"
-    x:Class="FreeWeatherApp.Views.TodayForecastPage"
-    Title="{Binding Source={x:Static localization:LocalizationHelper.Current}, Path=TodayForecastTitle}">
+    x:Class="FreeWeatherApp.Views.TodayForecastPage">
 
     <views:BasePage.BindingContext>
         <viewModels:TodayForecastViewModel x:Name="ViewModel" />

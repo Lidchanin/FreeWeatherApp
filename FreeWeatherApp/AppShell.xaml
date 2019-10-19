@@ -59,7 +59,7 @@
         Title="{Binding Source={x:Static localization:LocalizationHelper.Current}, Path=Settings}">
         <Tab>
             <ShellContent>
-                <views:OptionsPage />
+                <views:SettingsPage />
             </ShellContent>
         </Tab>
     </FlyoutItem>

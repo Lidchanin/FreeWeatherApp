@@ -9,6 +9,7 @@
         public abstract string Next48HoursTitle { get; }
         public abstract string TodayForecastTitle { get; }
         public abstract string WeekForecastTitle { get; }
+        public abstract string SettingsTitle { get; }
 
         #endregion Page Titles
 
@@ -20,5 +21,6 @@
         public abstract string ApparentTemperature { get; }
         public abstract string Settings { get; }
         public abstract string Credits { get; }
+        public abstract string ChooseLanguage { get; }
     }
 }

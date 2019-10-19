@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<views:BasePage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:FreeWeatherApp.Views;assembly=FreeWeatherApp"
+    xmlns:viewModels="clr-namespace:FreeWeatherApp.ViewModels;assembly=FreeWeatherApp"
+    xmlns:localization="clr-namespace:FreeWeatherApp.Helpers.Localization;assembly=FreeWeatherApp"
+    mc:Ignorable="d"
+    x:Class="FreeWeatherApp.Views.SettingsPage"
+    Title="{localization:Localization TextPropertyName=SettingsTitle}">
+
+    <views:BasePage.BindingContext>
+        <viewModels:SettingsViewModel x:Name="ViewModel" />
+    </views:BasePage.BindingContext>
+
+    <views:BasePage.Content>
+        <StackLayout>
+
+            <Label Text="{localization:Localization TextPropertyName=ChooseLanguage}" />
+
+            <Button
+                Text="Русский"
+                Clicked="Button_OnClicked" />
+
+            <Button
+                Text="English"
+                Clicked="Button_OnClicked2" />
+        </StackLayout>
+    </views:BasePage.Content>
+</views:BasePage>
