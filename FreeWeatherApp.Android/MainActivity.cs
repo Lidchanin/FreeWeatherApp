@@ -23,10 +23,11 @@ namespace FreeWeatherApp.Droid
 
             base.OnCreate(savedInstanceState);
 
-            Forms.SetFlags("CollectionView_Experimental");
-
             Platform.Init(this, savedInstanceState);
             Forms.Init(this, savedInstanceState);
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
+            FFImageLoading.Forms.Platform.CachedImageRenderer.InitImageViewHandler();
+            
             LoadApplication(new App());
         }
 

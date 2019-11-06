@@ -11,7 +11,7 @@
         {
             base.OnAppearing();
 
-            await ViewModel.GetTodayForecast();
+            await ViewModel.GetForecast();
         }
     }
 }

@@ -1,7 +1,9 @@
-﻿namespace FreeWeatherApp.Models.DarkSky
+﻿namespace FreeWeatherApp.Enums
 {
     public enum MeasurementUnit
     {
+        None = -1,
+
         /// <summary>
         /// Automatically select units based on geographic location
         /// </summary>
@@ -19,11 +21,27 @@
 
         /// <summary>
         /// Imperial units (the default)
+        ///
+        /// apparentTemperature in degrees centigrade
+        /// dewPoint in degrees centigrade
+        /// precipIntensity in millimeters per hour
+        /// pressure in hectopascals
+        /// visibility in kilometers
+        /// windGust in meters per second
+        /// windSpeed in meters per second
         /// </summary>
         Us,
 
         /// <summary>
         /// SI units
+        ///
+        /// apparentTemperature in degrees fahrenheit
+        /// dewPoint in degrees fahrenheit
+        /// precipIntensity in inches per hour
+        /// pressure in millibars
+        /// visibility in miles
+        /// windGust in miles per hour
+        /// windSpeed in miles per hour
         /// </summary>
         Si
     }

@@ -6,13 +6,13 @@ namespace FreeWeatherApp.Helpers.Localization
 {
     public class LocalizationExtension : IMarkupExtension<string>
     {
-        public string TextPropertyName { get; set; }
+        public string PropertyName { get; set; }
 
         public string ProvideValue(IServiceProvider serviceProvider)
         {
-            if (string.IsNullOrEmpty(TextPropertyName))
+            if (string.IsNullOrEmpty(PropertyName))
             {
-                throw new InvalidOperationException($"{nameof(TextPropertyName)} isn't set.");
+                throw new InvalidOperationException($"{nameof(PropertyName)} isn't set.");
             }
 
             if (serviceProvider == null)
@@ -20,15 +20,13 @@ namespace FreeWeatherApp.Helpers.Localization
                 throw new ArgumentNullException(nameof(serviceProvider));
             }
 
-            var propertyInfo = LocalizationHelper.Current.GetType().GetRuntimeProperty(TextPropertyName);
+            var propertyInfo = LocalizationHelper.Current.GetType().GetRuntimeProperty(PropertyName);
 
             return propertyInfo?.GetValue(LocalizationHelper.Current)?.ToString() ??
-                   throw new ArgumentException($"{nameof(TextPropertyName)} {TextPropertyName} isn't exists.");
+                   throw new ArgumentException($"{nameof(PropertyName)} {PropertyName} isn't exists.");
         }
 
-        object IMarkupExtension.ProvideValue(IServiceProvider serviceProvider)
-        {
-            return (this as IMarkupExtension<string>).ProvideValue(serviceProvider);
-        }
+        object IMarkupExtension.ProvideValue(IServiceProvider serviceProvider) => 
+            (this as IMarkupExtension<string>).ProvideValue(serviceProvider);
     }
 }

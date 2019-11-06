@@ -1,32 +1,31 @@
-﻿using FreeWeatherApp.Enums;
-using FreeWeatherApp.Models.DarkSky;
+﻿using FreeWeatherApp.Models.DarkSky;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Xamarin.Essentials;
 
 namespace FreeWeatherApp.ViewModels
 {
     public class TodayForecastViewModel : BaseViewModel
     {
-        public DataPoint ForecastData { get; set; }
+        public DataPoint TodayForecastData { get; set; }
+        public List<DataPoint> HourlyForecastData { get; set; }
 
         public TodayForecastViewModel()
         {
-            ForecastData = new DataPoint();
+            TodayForecastData = new DataPoint();
         }
 
-        public async Task GetTodayForecast()
+        public async Task GetForecast()
         {
-            var location = await LocationService.GetLocationAsync(GeolocationAccuracy.Best);
-
-            var response = await DarkSkyApiService.GetTodayForecastAsync(
-                location.Latitude,
-                location.Longitude,
-                LanguageCode.Ru,
-                MeasurementUnit.Si);
+            var response = await DarkSkyApiService.GetTodayForecastWith24HourlyAsync();
 
             if (response.IsSuccess)
             {
-                ForecastData = response.Model?.Currently;
+                TodayForecastData = response.Model?.Currently;
+
+                if (response.Model?.Hourly?.Data?.Count > 0)
+                {
+                    HourlyForecastData = response.Model?.Hourly?.Data;
+                }
             }
         }
     }

@@ -1,5 +1,4 @@
-﻿using FreeWeatherApp.Services;
-using FreeWeatherApp.Services.DarkSky;
+﻿using FreeWeatherApp.Services.DarkSky;
 using System.ComponentModel;
 
 namespace FreeWeatherApp.ViewModels
@@ -9,7 +8,5 @@ namespace FreeWeatherApp.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected static IDarkSkyApiService DarkSkyApiService => DarkSkyApiServiceImpl.Instance;
-
-        protected static ILocationService LocationService => LocationServiceImpl.Instance;
     }
 }

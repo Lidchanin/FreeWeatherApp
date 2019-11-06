@@ -1,6 +1,7 @@
-﻿using System;
+﻿using FreeWeatherApp.Enums;
 using FreeWeatherApp.Extensions;
 using Newtonsoft.Json;
+using System;
 
 namespace FreeWeatherApp.Models.DarkSky
 {
@@ -108,7 +109,7 @@ namespace FreeWeatherApp.Models.DarkSky
         /// </summary>
         /// <remarks>optional.</remarks>
         [JsonProperty(PropertyName = "icon")]
-        public Icon Icon { get; set; }
+        public WeatherIcon WeatherIcon { get; set; }
 
         /// <summary>
         /// The fractional part of the lunation number during the given day: a value of 0 corresponds
@@ -214,7 +215,7 @@ namespace FreeWeatherApp.Models.DarkSky
         /// A human-readable text summary of this data point.
         /// <para>
         /// (This property has millions of possible values, so don’t use it for automated purposes:
-        /// use the <see cref="Icon"/> property, instead!).
+        /// use the <see cref="WeatherIcon"/> property, instead!).
         /// </para>
         /// </summary>
         /// <remarks>optional.</remarks>

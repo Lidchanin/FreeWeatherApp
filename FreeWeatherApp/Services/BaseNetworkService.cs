@@ -35,6 +35,7 @@ namespace FreeWeatherApp.Services
 
         #region Private methods
 
+        //todo [!] Add exception handling
         private async Task<ResponseModel<T>> ExecuteWithGeneralExceptionHandling<T>(Func<Task<T>> func)
         {
             var response = new ResponseModel<T>();

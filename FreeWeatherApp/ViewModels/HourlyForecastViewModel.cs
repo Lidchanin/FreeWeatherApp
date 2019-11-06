@@ -1,8 +1,6 @@
-﻿using FreeWeatherApp.Enums;
-using FreeWeatherApp.Models.DarkSky;
+﻿using FreeWeatherApp.Models.DarkSky;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Xamarin.Essentials;
 
 namespace FreeWeatherApp.ViewModels
 {
@@ -17,13 +15,7 @@ namespace FreeWeatherApp.ViewModels
 
         public async Task GetHourlyForecast()
         {
-            var location = await LocationService.GetLocationAsync(GeolocationAccuracy.Best);
-
-            var response = await DarkSkyApiService.GetHourlyForecastAsync(
-                location.Latitude,
-                location.Longitude,
-                LanguageCode.Ru,
-                MeasurementUnit.Si);
+            var response = await DarkSkyApiService.GetHourlyForecastAsync();
 
             if (response.IsSuccess)
             {

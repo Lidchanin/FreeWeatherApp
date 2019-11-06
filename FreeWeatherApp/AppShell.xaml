@@ -25,11 +25,11 @@
     </Shell.FlyoutHeader>
 
     <FlyoutItem
-        Route="hourly_forecast"
-        Title="{Binding Source={x:Static localization:LocalizationHelper.Current}, Path=HourlyForecast}">
+        Route="test_page"
+        Title="Test page">
         <Tab>
             <ShellContent>
-                <views:HourlyForecastPage />
+                <views:TestPage />
             </ShellContent>
         </Tab>
     </FlyoutItem>
@@ -40,6 +40,16 @@
         <Tab>
             <ShellContent>
                 <views:TodayForecastPage />
+            </ShellContent>
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem
+        Route="hourly_forecast"
+        Title="{Binding Source={x:Static localization:LocalizationHelper.Current}, Path=HourlyForecast}">
+        <Tab>
+            <ShellContent>
+                <views:HourlyForecastPage />
             </ShellContent>
         </Tab>
     </FlyoutItem>

@@ -8,9 +8,12 @@ namespace FreeWeatherApp.Helpers.Localization
     {
         public static Language Current { get; private set; } = GetLanguageByCode(PreferencesHelper.GetLanguageCode());
 
+        public static LanguageCode CurrentCode { get; private set; } = PreferencesHelper.GetLanguageCode();
+
         public static void SetLanguage(LanguageCode code)
         {
             PreferencesHelper.SetLanguageCode(code);
+            CurrentCode = PreferencesHelper.GetLanguageCode();
             Current = GetLanguageByCode(code);
         }
 

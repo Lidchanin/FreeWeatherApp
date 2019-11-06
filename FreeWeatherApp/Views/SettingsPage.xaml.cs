@@ -1,6 +1,8 @@
-﻿using System;
-using FreeWeatherApp.Enums;
+﻿using FreeWeatherApp.Enums;
 using FreeWeatherApp.Helpers.Localization;
+using FreeWeatherApp.Helpers.Measures;
+using System;
+using Xamarin.Forms;
 
 namespace FreeWeatherApp.Views
 {
@@ -15,8 +17,8 @@ namespace FreeWeatherApp.Views
         {
             LocalizationHelper.SetLanguage(LanguageCode.Ru);
 
-            App.Current.MainPage = new AppShell();
-            await AppShell.Current.GoToAsync("//settings");
+            Application.Current.MainPage = new AppShell();
+            await Shell.Current.GoToAsync("//settings");
         }
 
 
@@ -24,8 +26,24 @@ namespace FreeWeatherApp.Views
         {
             LocalizationHelper.SetLanguage(LanguageCode.En);
 
-            App.Current.MainPage = new AppShell();
-            await AppShell.Current.GoToAsync("//settings");
+            Application.Current.MainPage = new AppShell();
+            await Shell.Current.GoToAsync("//settings");
+        }
+
+        private async void Button_OnClicked3(object sender, EventArgs e)
+        {
+            MeasuresHelper.SetMeasurementUnit(MeasurementUnit.Us);
+            
+            Application.Current.MainPage = new AppShell();
+            await Shell.Current.GoToAsync("//settings");
+        }
+
+        private async void Button_OnClicked4(object sender, EventArgs e)
+        {
+            MeasuresHelper.SetMeasurementUnit(MeasurementUnit.Si);
+            
+            Application.Current.MainPage = new AppShell();
+            await Shell.Current.GoToAsync("//settings");
         }
     }
 }

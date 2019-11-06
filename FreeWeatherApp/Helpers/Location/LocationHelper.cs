@@ -2,19 +2,20 @@
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 
-namespace FreeWeatherApp.Services
+namespace FreeWeatherApp.Helpers.Location
 {
-    public sealed class LocationServiceImpl : ILocationService
+    public static class LocationHelper
     {
-        #region Instance
+        public static GeolocationAccuracy CurrentAccuracy { get; private set; } =
+            PreferencesHelper.GetGeolocationAccuracy();
 
-        private static ILocationService _instance;
+        public static void SetAccuracy(GeolocationAccuracy accuracy)
+        {
+            PreferencesHelper.SetGeolocationAccuracy(accuracy);
+            CurrentAccuracy = PreferencesHelper.GetGeolocationAccuracy();
+        }
 
-        public static ILocationService Instance => _instance ?? (_instance = new LocationServiceImpl());
-
-        #endregion Instance
-
-        public async Task<Location> GetLastKnownLocationAsync()
+        public static async Task<Xamarin.Essentials.Location> GetLastKnownLocationAsync()
         {
             try
             {
@@ -45,11 +46,11 @@ namespace FreeWeatherApp.Services
             return null;
         }
 
-        public async Task<Location> GetLocationAsync(GeolocationAccuracy accuracy = GeolocationAccuracy.Medium)
+        public static async Task<Xamarin.Essentials.Location> GetLocationAsync()
         {
             try
             {
-                var request = new GeolocationRequest(accuracy);
+                var request = new GeolocationRequest(CurrentAccuracy);
                 var location = await Geolocation.GetLocationAsync(request);
 
                 if (location != null)

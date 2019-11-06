@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace FreeWeatherApp.Models.DarkSky
+namespace FreeWeatherApp.Enums
 {
     /// <summary>
     /// Types of precipitation Dark Sky API can return.

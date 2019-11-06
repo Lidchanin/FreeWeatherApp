@@ -10,7 +10,7 @@
     xmlns:localization="clr-namespace:FreeWeatherApp.Helpers.Localization;assembly=FreeWeatherApp"
     mc:Ignorable="d"
     x:Class="FreeWeatherApp.Views.SettingsPage"
-    Title="{localization:Localization TextPropertyName=SettingsTitle}">
+    Title="{localization:Localization PropertyName=SettingsTitle}">
 
     <views:BasePage.BindingContext>
         <viewModels:SettingsViewModel x:Name="ViewModel" />
@@ -19,7 +19,7 @@
     <views:BasePage.Content>
         <StackLayout>
 
-            <Label Text="{localization:Localization TextPropertyName=ChooseLanguage}" />
+            <Label Text="{localization:Localization PropertyName=ChooseLanguage}" />
 
             <Button
                 Text="Русский"
@@ -28,6 +28,16 @@
             <Button
                 Text="English"
                 Clicked="Button_OnClicked2" />
+
+            <Label Text="{localization:Localization PropertyName=ChooseMeasurementUnits}" />
+
+            <Button
+                Text="US"
+                Clicked="Button_OnClicked3" />
+
+            <Button
+                Text="SI"
+                Clicked="Button_OnClicked4" />
         </StackLayout>
     </views:BasePage.Content>
 </views:BasePage>

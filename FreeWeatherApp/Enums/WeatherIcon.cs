@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace FreeWeatherApp.Models.DarkSky
+namespace FreeWeatherApp.Enums
 {
     /// <summary>
     /// A machine-readable text summary of this data point, suitable for selecting an icon for display.
@@ -9,7 +9,7 @@ namespace FreeWeatherApp.Models.DarkSky
     /// hail, thunderstorm, or tornado, may be defined in the future).
     /// </para>
     /// </summary>
-    public enum Icon
+    public enum WeatherIcon
     {
         /// <summary>
         /// An unknown icon.
@@ -75,6 +75,6 @@ namespace FreeWeatherApp.Models.DarkSky
         /// Partly Cloudy Night.
         /// </summary>
         [EnumMember(Value = "partly-cloudy-night")]
-        PartlyCloudyNight,
+        PartlyCloudyNight
     }
 }

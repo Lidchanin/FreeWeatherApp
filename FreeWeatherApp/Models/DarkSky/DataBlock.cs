@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using FreeWeatherApp.Enums;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace FreeWeatherApp.Models.DarkSky
@@ -17,11 +18,11 @@ namespace FreeWeatherApp.Models.DarkSky
 
         /// <summary>
         /// A machine-readable text summary of this data block.
-        /// <para>(May take on the same values as the <see cref="Icon"/> property of data points).</para>
+        /// <para>(May take on the same values as the <see cref="WeatherIcon"/> property of data points).</para>
         /// </summary>
         /// <remarks>optional.</remarks>
         [JsonProperty(PropertyName = "icon")]
-        public Icon Icon { get; set; }
+        public WeatherIcon WeatherIcon { get; set; }
 
         /// <summary>
         /// A human-readable summary of this data block.

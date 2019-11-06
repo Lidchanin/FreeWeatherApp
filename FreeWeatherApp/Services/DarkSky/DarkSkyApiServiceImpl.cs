@@ -9,6 +9,9 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using FreeWeatherApp.Helpers.Localization;
+using FreeWeatherApp.Helpers.Location;
+using FreeWeatherApp.Helpers.Measures;
 
 namespace FreeWeatherApp.Services.DarkSky
 {
@@ -43,17 +46,11 @@ namespace FreeWeatherApp.Services.DarkSky
             };
         }
 
-        public async Task<ResponseModel<Forecast>> GetHourlyForecastAsync(
-            double latitude,
-            double longitude,
-            LanguageCode languageCode,
-            MeasurementUnit measurementUnit)
+        public async Task<ResponseModel<Forecast>> GetHourlyForecastAsync()
         {
             var parameters = new OptionalParameters
             {
                 ExtendHourly = false,
-                LanguageCode = languageCode,
-                MeasurementUnit = measurementUnit,
                 DataBlocksToExclude = new List<ExclusionBlock>
                 {
                     ExclusionBlock.Alerts,
@@ -64,44 +61,55 @@ namespace FreeWeatherApp.Services.DarkSky
                 }
             };
 
-            return await GetAsync<Forecast>(BuildRequestUri(latitude, longitude, parameters));
+            return await GetAsync<Forecast>(await BuildRequestUri(parameters));
         }
 
-        public async Task<ResponseModel<Forecast>> GetTodayForecastAsync(
-            double latitude,
-            double longitude,
-            LanguageCode languageCode,
-            MeasurementUnit measurementUnit)
+        public async Task<ResponseModel<Forecast>> GetTodayForecastAsync()
         {
             var parameters = new OptionalParameters
             {
                 ExtendHourly = false,
-                LanguageCode = languageCode,
-                MeasurementUnit = measurementUnit,
                 DataBlocksToExclude = new List<ExclusionBlock>
                 {
                     ExclusionBlock.Alerts,
                     ExclusionBlock.Flags,
                     ExclusionBlock.Minutely,
-                    ExclusionBlock.Hourly,
                     ExclusionBlock.Daily
                 }
             };
 
-            return await GetAsync<Forecast>(BuildRequestUri(latitude, longitude, parameters));
+            return await GetAsync<Forecast>(await BuildRequestUri(parameters));
         }
 
-        public async Task<ResponseModel<Forecast>> GetWeekForecastAsync(
-            double latitude,
-            double longitude,
-            LanguageCode languageCode,
-            MeasurementUnit measurementUnit)
+        public async Task<ResponseModel<Forecast>> GetTodayForecastWith24HourlyAsync()
         {
             var parameters = new OptionalParameters
             {
                 ExtendHourly = false,
-                LanguageCode = languageCode,
-                MeasurementUnit = measurementUnit,
+                DataBlocksToExclude = new List<ExclusionBlock>
+                {
+                    ExclusionBlock.Alerts,
+                    ExclusionBlock.Flags,
+                    ExclusionBlock.Minutely,
+                    ExclusionBlock.Daily
+                }
+            };
+
+            var forecast = await GetAsync<Forecast>(await BuildRequestUri(parameters));
+
+            if (forecast.IsSuccess && forecast.Model?.Hourly?.Data?.Count > 24)
+            {
+                forecast.Model.Hourly.Data = forecast.Model.Hourly.Data.Take(24).ToList();
+            }
+
+            return forecast;
+        }
+
+        public async Task<ResponseModel<Forecast>> GetWeekForecastAsync()
+        {
+            var parameters = new OptionalParameters
+            {
+                ExtendHourly = false,
                 DataBlocksToExclude = new List<ExclusionBlock>
                 {
                     ExclusionBlock.Alerts,
@@ -112,42 +120,51 @@ namespace FreeWeatherApp.Services.DarkSky
                 }
             };
 
-            return await GetAsync<Forecast>(BuildRequestUri(latitude, longitude, parameters));
+            return await GetAsync<Forecast>(await BuildRequestUri(parameters));
         }
 
-        private static string BuildRequestUri(double latitude, double longitude, OptionalParameters parameters)
+        private static async Task<string> BuildRequestUri(OptionalParameters parameters)
         {
-            var queryString =
-                new StringBuilder(FormattableString.Invariant($"forecast/{ApiKey}/{latitude:N4},{longitude:N4}"));
+            var location = await LocationHelper.GetLocationAsync();
 
-            if (parameters?.ForecastDateTime != null)
+            //todo [!] Location == null
+            if (location == null)
+            {
+                throw new Exception("Location == null");
+            }
+
+            var queryString =
+                new StringBuilder(
+                    FormattableString.Invariant($"forecast/{ApiKey}/{location.Latitude:N4},{location.Longitude:N4}"));
+
+            parameters.LanguageCode = LocalizationHelper.CurrentCode;
+            parameters.MeasurementUnit = MeasuresHelper.Current;
+
+            if (parameters.ForecastDateTime != null)
             {
                 queryString.Append(
                     $",{parameters.ForecastDateTime.Value.ToString("yyyy-MM-ddTHH:mm:ssK", CultureInfo.InvariantCulture)}");
             }
 
-            if (parameters != null)
+            queryString.Append("?");
+
+            if (parameters.DataBlocksToExclude != null)
             {
-                queryString.Append("?");
-
-                if (parameters.DataBlocksToExclude != null)
-                {
-                    queryString.Append(
-                        $"&exclude={string.Join(",", parameters.DataBlocksToExclude.Select(x => x.ToString().ToLowerInvariant()))}");
-                }
-
-                if (parameters.ExtendHourly != null && parameters.ExtendHourly.Value)
-                {
-                    queryString.Append("&extend=hourly");
-                }
-
-                if (parameters.LanguageCode != LanguageCode.None)
-                {
-                    queryString.Append($"&lang={parameters.LanguageCode.ToString().ToLowerInvariant()}");
-                }
-
-                queryString.Append($"&units={parameters.MeasurementUnit.ToString().ToLowerInvariant()}");
+                queryString.Append(
+                    $"&exclude={string.Join(",", parameters.DataBlocksToExclude.Select(x => x.ToString().ToLowerInvariant()))}");
             }
+
+            if (parameters.ExtendHourly != null && parameters.ExtendHourly.Value)
+            {
+                queryString.Append("&extend=hourly");
+            }
+
+            if (parameters.LanguageCode != LanguageCode.None)
+            {
+                queryString.Append($"&lang={parameters.LanguageCode.ToString().ToLowerInvariant()}");
+            }
+
+            queryString.Append($"&units={parameters.MeasurementUnit.ToString().ToLowerInvariant()}");
 
             return queryString.ToString();
         }

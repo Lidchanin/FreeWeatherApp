@@ -20,9 +20,10 @@ namespace FreeWeatherApp.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            Forms.SetFlags("CollectionView_Experimental");
-
             Forms.Init();
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
+            FFImageLoading.Forms.Platform.CachedImageRenderer.InitImageSourceHandler();
+
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
