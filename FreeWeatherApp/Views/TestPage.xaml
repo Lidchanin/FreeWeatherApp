@@ -9,6 +9,8 @@
     <ContentPage.Content>
         <Grid 
             x:Name="MainGrid" 
+            ColumnSpacing="0"
+            RowSpacing="0"
             BackgroundColor="DarkBlue"/>
     </ContentPage.Content>
 </views:BasePage>

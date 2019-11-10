@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using FFImageLoading.Cache;
+﻿using FFImageLoading.Cache;
 using FFImageLoading.Forms;
-using Xamarin.Essentials;
+using FFImageLoading.Transformations;
+using FFImageLoading.Work;
+using FreeWeatherApp.Helpers;
+using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace FreeWeatherApp.Views
 {
-    public partial class TestPage : BasePage
+    public partial class TestPage
     {
-        private List<VisualElement> _elements = new List<VisualElement>();
-
-        private bool _starsAdded = false;
-        private bool _initialized = false;
-        private List<VisualElement> _stars = new List<VisualElement>();
+        private bool _initialized;
 
         public TestPage()
         {
@@ -28,84 +23,153 @@ namespace FreeWeatherApp.Views
 
             if (!_initialized)
             {
-                PositionElement();
-                RotateElements();
+                StartAnimations();
 
                 _initialized = true;
             }
         }
 
-        private async void PositionElement()
+        void StartAnimations()
         {
-            var random = new Random();
+            var views = new List<View>();
 
-            for (int elementGroupIndex = 0; elementGroupIndex < 3; elementGroupIndex++)
+            for (var i = 0; i < 2; i++)
             {
-                var elementGroup = new Grid();
-
-                for (int elementIndex = 0; elementIndex < 60; elementIndex++)
+                if (i == 0)
                 {
-                    var size = random.Next(20, 80);
+                    views.Add(CreateView(FilenameHelper.Weather.ClearDayIcon));
+                }
+                else
+                {
+                    views.Add(CreateView(FilenameHelper.Weather.ClearNightIcon));
+                }
 
-                    var element = new CachedImage
+                MainGrid.Children.Add(views[i]);
+            }
+
+            for (var i = 0; i < views.Count; i++)
+            {
+                var index = i;
+
+                #region rotation
+
+                var rotateAnimations = new Animation(
+                    rotation => { MainGrid.Children[index].Rotation = rotation; },
+                    0,
+                    360,
+                    Easing.Linear);
+
+                #endregion
+
+                #region scaling
+
+                var scaleUpAnimation = new Animation(
+                    x => { MainGrid.Children[index].Scale = x; },
+                    1,
+                    2,
+                    Easing.Linear);
+
+                var scaleDownAnimation = new Animation(
+                    x => { MainGrid.Children[index].Scale = x; },
+                    2,
+                    1,
+                    Easing.Linear);
+
+                #endregion
+
+                #region translation
+
+                var translateXUpAnimation = new Animation(
+                    x => { MainGrid.Children[index].TranslationX = x; },
+                    -80, ScreenWidth, Easing.Linear);
+
+                var translateXDownAnimation = new Animation(
+                    x => { MainGrid.Children[index].TranslationX = x; },
+                    ScreenWidth, -80, Easing.Linear);
+
+                var translateYUpAnimation = new Animation(
+                    y => { MainGrid.Children[index].TranslationY = y; },
+                    0, ScreenWidth - 80, Easing.Linear);
+
+                var translateYDownAnimation = new Animation(
+                    y => { MainGrid.Children[index].TranslationY = y; },
+                    ScreenWidth - 80, 0, Easing.Linear);
+
+                #endregion
+
+                #region translation 2
+
+                var translate2_1Animation = new Animation(
+                    x =>
                     {
-                        CacheType = CacheType.All,
-                        Source = "icon_cloudy.png",
-                        HeightRequest = size,
-                        WidthRequest = size,
-                        HorizontalOptions = LayoutOptions.Start,
-                        VerticalOptions = LayoutOptions.Start,
-                        TranslationX = random.Next(0, (int) ScreenWidth),
-                        TranslationY = random.Next(0, (int) ScreenHeight),
-                    };
+                        MainGrid.Children[index].TranslationX = x;
+                        MainGrid.Children[index].TranslationY = x * x * 0.005;
+                    },
+                    -(ScreenWidth + MainGrid.Children[index].WidthRequest) / 2, 0, Easing.Linear);
 
-                    elementGroup.Children.Add(element);
-                }
+                var translate2_2Animation = new Animation(
+                    x =>
+                    {
+                        MainGrid.Children[index].TranslationX = x;
+                        MainGrid.Children[index].TranslationY = x * x * 0.005;
+                    },
+                    0, (ScreenWidth + MainGrid.Children[index].WidthRequest) / 2, Easing.Linear);
 
-                _elements.Add(elementGroup);
-                MainGrid.Children.Add(elementGroup);
-            }
-        }
+                #endregion
 
-        private async Task RotateElements()
-        {
-            var rotateTasks = new List<Task>();
-            var random = new Random();
+                var parentAnimations = new Animation();
 
-            for (var i = 0; i < _elements.Count; i++)
-            {
-                var element = _elements[i];
-                var rate = random.Next(240000, 300000);
+                parentAnimations.Add(0, 1, rotateAnimations);
 
-                if (i % 2 == 0)
+                //parentAnimations.Add(0, 0.5, translateXUpAnimation);
+                //parentAnimations.Add(0.5, 1, translateXDownAnimation);
+                //parentAnimations.Add(0, 0.5, translateYUpAnimation);
+                //parentAnimations.Add(0.5, 1, translateYDownAnimation);
+
+                if (i == 0)
                 {
-                    rotateTasks.Add(RotateElement(element, (uint) rate, new CancellationToken(), true));
+                    parentAnimations.Add(0, 0.5, scaleUpAnimation);
+                    parentAnimations.Add(0.5, 1, scaleDownAnimation);
+
+                    parentAnimations.Add(0, 0.5, translate2_1Animation);
+                    parentAnimations.Add(0.5, 1, translate2_2Animation);
                 }
                 else
                 {
-                    rotateTasks.Add(RotateElement(element, (uint) rate, new CancellationToken(), false));
-                }
-            }
+                    parentAnimations.Add(0, 0.5, scaleDownAnimation);
+                    parentAnimations.Add(0.5, 1, scaleUpAnimation);
 
-            await Task.WhenAll(rotateTasks);
+                    parentAnimations.Add(0, 0.5, translate2_2Animation);
+                    parentAnimations.Add(0.5, 1, translate2_1Animation);
+                }
+
+                parentAnimations.Commit(this, $"ChildrenAnimations{i}", 100, 5000, null, null, () => true);
+            }
         }
 
-        protected async Task RotateElement(VisualElement element, uint duration, CancellationToken cancellation,
-            bool clockwise = true)
+        private static View CreateView(string filename)
         {
-            while (!cancellation.IsCancellationRequested)
+            //var random = new Random();
+
+            //var size = random.Next(80, 160);
+
+            var image = new CachedImage
             {
-                if (clockwise)
+                CacheType = CacheType.All,
+                Source = filename,
+                //HeightRequest = size,
+                //WidthRequest = size,
+                HeightRequest = 80,
+                WidthRequest= 80,
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Center,
+                Transformations = new List<ITransformation>
                 {
-                    await element.RotateTo(360, duration, Easing.Linear);
-                    await element.RotateTo(0, 0); // reset to initial position
+                    new TintTransformation {HexColor = "#FFFFFF", EnableSolidColor = true}
                 }
-                else
-                {
-                    await element.RotateTo(0, 0); // reset to initial position
-                    await element.RotateTo(360, duration, Easing.Linear);
-                }
-            }
+            };
+
+            return image;
         }
     }
 }
