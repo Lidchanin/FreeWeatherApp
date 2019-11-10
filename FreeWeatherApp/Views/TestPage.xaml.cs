@@ -54,7 +54,7 @@ namespace FreeWeatherApp.Views
                 #region rotation
 
                 var rotateAnimations = new Animation(
-                    rotation => { MainGrid.Children[index].Rotation = rotation; },
+                    rotation => { views[index].Rotation = rotation; },
                     0,
                     360,
                     Easing.Linear);
@@ -64,13 +64,13 @@ namespace FreeWeatherApp.Views
                 #region scaling
 
                 var scaleUpAnimation = new Animation(
-                    x => { MainGrid.Children[index].Scale = x; },
+                    x => { views[index].Scale = x; },
                     1,
                     2,
                     Easing.Linear);
 
                 var scaleDownAnimation = new Animation(
-                    x => { MainGrid.Children[index].Scale = x; },
+                    x => { views[index].Scale = x; },
                     2,
                     1,
                     Easing.Linear);
@@ -80,19 +80,19 @@ namespace FreeWeatherApp.Views
                 #region translation
 
                 var translateXUpAnimation = new Animation(
-                    x => { MainGrid.Children[index].TranslationX = x; },
+                    x => { views[index].TranslationX = x; },
                     -80, ScreenWidth, Easing.Linear);
 
                 var translateXDownAnimation = new Animation(
-                    x => { MainGrid.Children[index].TranslationX = x; },
+                    x => { views[index].TranslationX = x; },
                     ScreenWidth, -80, Easing.Linear);
 
                 var translateYUpAnimation = new Animation(
-                    y => { MainGrid.Children[index].TranslationY = y; },
+                    y => { views[index].TranslationY = y; },
                     0, ScreenWidth - 80, Easing.Linear);
 
                 var translateYDownAnimation = new Animation(
-                    y => { MainGrid.Children[index].TranslationY = y; },
+                    y => { views[index].TranslationY = y; },
                     ScreenWidth - 80, 0, Easing.Linear);
 
                 #endregion
@@ -102,18 +102,18 @@ namespace FreeWeatherApp.Views
                 var translate2_1Animation = new Animation(
                     x =>
                     {
-                        MainGrid.Children[index].TranslationX = x;
-                        MainGrid.Children[index].TranslationY = x * x * 0.005;
+                        views[index].TranslationX = x;
+                        views[index].TranslationY = x * x * 0.005;
                     },
-                    -(ScreenWidth + MainGrid.Children[index].WidthRequest) / 2, 0, Easing.Linear);
+                    -(ScreenWidth + views[index].WidthRequest) / 2, 0, Easing.Linear);
 
                 var translate2_2Animation = new Animation(
                     x =>
                     {
-                        MainGrid.Children[index].TranslationX = x;
-                        MainGrid.Children[index].TranslationY = x * x * 0.005;
+                        views[index].TranslationX = x;
+                        views[index].TranslationY = x * x * 0.005;
                     },
-                    0, (ScreenWidth + MainGrid.Children[index].WidthRequest) / 2, Easing.Linear);
+                    0, (ScreenWidth + views[index].WidthRequest) / 2, Easing.Linear);
 
                 #endregion
 
@@ -126,7 +126,7 @@ namespace FreeWeatherApp.Views
                 //parentAnimations.Add(0, 0.5, translateYUpAnimation);
                 //parentAnimations.Add(0.5, 1, translateYDownAnimation);
 
-                if (i == 0)
+                if (i == 1)
                 {
                     parentAnimations.Add(0, 0.5, scaleUpAnimation);
                     parentAnimations.Add(0.5, 1, scaleDownAnimation);
