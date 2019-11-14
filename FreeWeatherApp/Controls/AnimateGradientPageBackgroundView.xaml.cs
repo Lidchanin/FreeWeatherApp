@@ -142,16 +142,37 @@ namespace FreeWeatherApp.Controls
                 var cloudView = CreateView(
                     FilenameHelper.Weather.CloudyColorIcon,
                     random.Next(50, 150),
-                    LayoutOptions.Start,
+                    LayoutOptions.Center,
                     LayoutOptions.Start);
 
-                var translateAnimation = CreateSinusoidAnimation(
+                var translateAnimation = new Animation();
+
+                var leftAnimation = CreateLeftSinusoidAnimation(
                     cloudView,
                     _screenWidth,
                     _screenHeight / 10 * index,
                     25,
                     0.025,
                     0);
+
+                var rightAnimation = CreateRightSinusoidAnimation(
+                    cloudView,
+                    _screenWidth,
+                    _screenHeight / 10 * index,
+                    25,
+                    0.025,
+                    0);
+
+                if (i % 2 == 0)
+                {
+                    translateAnimation.Add(0, 0.5, leftAnimation);
+                    translateAnimation.Add(0.5, 1, rightAnimation);
+                }
+                else
+                {
+                    translateAnimation.Add(0, 0.5, rightAnimation);
+                    translateAnimation.Add(0.5, 1, leftAnimation);
+                }
 
                 translateAnimation.Commit(
                     this,
@@ -261,6 +282,44 @@ namespace FreeWeatherApp.Controls
                 },
                 -element.WidthRequest,
                 screenWidth,
+                Easing.Linear);
+        }
+
+        private static Animation CreateLeftSinusoidAnimation(
+            VisualElement element,
+            double screenWidth,
+            double a,
+            double b,
+            double c,
+            double d)
+        {
+            return new Animation(
+                x =>
+                {
+                    element.TranslationX = x;
+                    element.TranslationY = a + b * Math.Sin(c * x + d);
+                },
+                -(screenWidth + element.WidthRequest) / 2,
+                0,
+                Easing.Linear);
+        }
+
+        private static Animation CreateRightSinusoidAnimation(
+            VisualElement element,
+            double screenWidth,
+            double a,
+            double b,
+            double c,
+            double d)
+        {
+            return new Animation(
+                x =>
+                {
+                    element.TranslationX = x;
+                    element.TranslationY = a + b * Math.Sin(c * x + d);
+                },
+                0,
+                (screenWidth + element.WidthRequest) / 2,
                 Easing.Linear);
         }
 
