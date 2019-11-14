@@ -185,4 +185,13 @@
   <ItemGroup>
     <BundleResource Include="Resources\icon_wind.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_clear_day_color.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_clear_night_color.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_cloudy_color.png" />
+  </ItemGroup>
 </Project>

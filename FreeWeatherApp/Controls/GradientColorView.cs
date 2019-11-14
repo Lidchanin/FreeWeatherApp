@@ -6,6 +6,8 @@ namespace FreeWeatherApp.Controls
     {
         #region Bindable Properties
 
+        #region GradientStartColor Property
+
         public static readonly BindableProperty GradientStartColorProperty = BindableProperty.Create(
             nameof(GradientStartColor),
             typeof(Color),
@@ -17,6 +19,10 @@ namespace FreeWeatherApp.Controls
             get => (Color) GetValue(GradientStartColorProperty);
             set => SetValue(GradientStartColorProperty, value);
         }
+
+        #endregion GradientStartColor Property
+
+        #region GradientEndColor Property
 
         public static readonly BindableProperty GradientEndColorProperty = BindableProperty.Create(
             nameof(GradientEndColor),
@@ -30,6 +36,10 @@ namespace FreeWeatherApp.Controls
             set => SetValue(GradientEndColorProperty, value);
         }
 
+        #endregion GradientEndColor Property
+
+        #region GradientOrientation Property 
+        
         public static readonly BindableProperty GradientOrientationProperty = BindableProperty.Create(
             nameof(GradientOrientation),
             typeof(Orientation),
@@ -47,6 +57,8 @@ namespace FreeWeatherApp.Controls
             Horizontal,
             Vertical
         }
+
+        #endregion GradientOrientation Property 
 
         #endregion Bindable Properties
     }

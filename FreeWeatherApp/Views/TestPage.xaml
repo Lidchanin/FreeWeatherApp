@@ -1,24 +1,20 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-
+﻿
 <views:BasePage
+    x:Class="FreeWeatherApp.Views.TestPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:views="clr-namespace:FreeWeatherApp.Views;assembly=FreeWeatherApp"
     xmlns:controls="clr-namespace:FreeWeatherApp.Controls;assembly=FreeWeatherApp"
-    x:Class="FreeWeatherApp.Views.TestPage">
+    xmlns:views="clr-namespace:FreeWeatherApp.Views;assembly=FreeWeatherApp"
+    x:Name="Page">
 
     <ContentPage.Content>
-        <Grid
-            x:Name="MainGrid"
-            ColumnSpacing="0"
-            RowSpacing="0">
-
-            <Grid.Children>
-                <controls:GradientColorView
-                    GradientStartColor="CornflowerBlue"
-                    GradientEndColor="DarkSlateBlue"
-                    GradientOrientation="Horizontal" />
-            </Grid.Children>
+        <Grid>
+            <controls:AnimateGradientPageBackgroundView
+                x:Name="PageBackgroundView"
+                x:FieldModifier="private"
+                GradientEndColor="DarkSlateBlue"
+                GradientOrientation="Vertical"
+                GradientStartColor="CornflowerBlue" />
         </Grid>
     </ContentPage.Content>
 </views:BasePage>

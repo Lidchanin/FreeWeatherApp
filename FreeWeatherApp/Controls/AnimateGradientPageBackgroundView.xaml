@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<ContentView
+    x:Class="FreeWeatherApp.Controls.AnimateGradientPageBackgroundView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:FreeWeatherApp.Controls;assembly=FreeWeatherApp"
+    x:Name="MainView">
+
+    <ContentView.Content>
+        <Grid>
+            <controls:GradientColorView
+                GradientEndColor="{Binding Source={x:Reference MainView}, Path=GradientEndColor}"
+                GradientOrientation="{Binding Source={x:Reference MainView}, Path=GradientOrientation}"
+                GradientStartColor="{Binding Source={x:Reference MainView}, Path=GradientStartColor}" />
+
+            <Grid
+                x:Name="AnimationContainer"
+                x:FieldModifier="private"
+                ColumnSpacing="0"
+                RowSpacing="0" />
+        </Grid>
+    </ContentView.Content>
+</ContentView>

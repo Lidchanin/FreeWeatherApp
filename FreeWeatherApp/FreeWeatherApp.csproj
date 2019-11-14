@@ -20,7 +20,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Controls\AnimateGradientPageBackgroundView.xaml.cs">
+      <DependentUpon>AnimateGradientPageBackgroundView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="AppShell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\AnimateGradientPageBackgroundView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\HourlyForecastSmallView.xaml">
