@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 
-namespace FreeWeatherApp.Helpers.Location
+namespace FreeWeatherApp.Helpers
 {
     public static class LocationHelper
     {
@@ -15,7 +15,7 @@ namespace FreeWeatherApp.Helpers.Location
             CurrentAccuracy = PreferencesHelper.GetGeolocationAccuracy();
         }
 
-        public static async Task<Xamarin.Essentials.Location> GetLastKnownLocationAsync()
+        public static async Task<Location> GetLastKnownLocationAsync()
         {
             try
             {
@@ -28,25 +28,25 @@ namespace FreeWeatherApp.Helpers.Location
             }
             catch (FeatureNotSupportedException fnsEx)
             {
-                // Handle not supported on device exception
+                CrashlyticsHelper.TrackError(fnsEx);
             }
             catch (FeatureNotEnabledException fneEx)
             {
-                // Handle not enabled on device exception
+                CrashlyticsHelper.TrackError(fneEx);
             }
             catch (PermissionException pEx)
             {
-                // Handle permission exception
+                CrashlyticsHelper.TrackError(pEx);
             }
             catch (Exception ex)
             {
-                // Unable to get location
+                CrashlyticsHelper.TrackError(ex);
             }
 
             return null;
         }
 
-        public static async Task<Xamarin.Essentials.Location> GetLocationAsync()
+        public static async Task<Location> GetLocationAsync()
         {
             try
             {
@@ -60,19 +60,19 @@ namespace FreeWeatherApp.Helpers.Location
             }
             catch (FeatureNotSupportedException fnsEx)
             {
-                // Handle not supported on device exception
+                CrashlyticsHelper.TrackError(fnsEx);
             }
             catch (FeatureNotEnabledException fneEx)
             {
-                // Handle not enabled on device exception
+                CrashlyticsHelper.TrackError(fneEx);
             }
             catch (PermissionException pEx)
             {
-                // Handle permission exception
+                CrashlyticsHelper.TrackError(pEx);
             }
             catch (Exception ex)
             {
-                // Unable to get location
+                CrashlyticsHelper.TrackError(ex);
             }
 
             return null;

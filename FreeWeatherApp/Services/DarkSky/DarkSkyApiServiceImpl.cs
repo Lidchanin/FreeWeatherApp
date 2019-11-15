@@ -1,4 +1,7 @@
 ﻿using FreeWeatherApp.Enums;
+using FreeWeatherApp.Helpers;
+using FreeWeatherApp.Helpers.Localization;
+using FreeWeatherApp.Helpers.Measures;
 using FreeWeatherApp.Models;
 using FreeWeatherApp.Models.DarkSky;
 using System;
@@ -9,9 +12,6 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using FreeWeatherApp.Helpers.Localization;
-using FreeWeatherApp.Helpers.Location;
-using FreeWeatherApp.Helpers.Measures;
 
 namespace FreeWeatherApp.Services.DarkSky
 {

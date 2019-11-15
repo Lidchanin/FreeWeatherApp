@@ -1,4 +1,6 @@
-﻿namespace FreeWeatherApp
+﻿using FreeWeatherApp.Helpers;
+
+namespace FreeWeatherApp
 {
     public partial class App
     {
@@ -11,6 +13,7 @@
 
         protected override void OnStart()
         {
+            CrashlyticsHelper.Init();
         }
 
         protected override void OnSleep()
