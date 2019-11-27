@@ -3,13 +3,12 @@
 <views:BasePage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:l10n="clr-namespace:FreeWeatherApp.Helpers.Localization;assembly=FreeWeatherApp"
     xmlns:viewModels="clr-namespace:FreeWeatherApp.ViewModels;assembly=FreeWeatherApp"
     xmlns:views="clr-namespace:FreeWeatherApp.Views;assembly=FreeWeatherApp"
     xmlns:controls="clr-namespace:FreeWeatherApp.Controls;assembly=FreeWeatherApp"
-    mc:Ignorable="d"
+    xmlns:helpers="clr-namespace:FreeWeatherApp.Helpers;assembly=FreeWeatherApp"
+    xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     x:Class="FreeWeatherApp.Views.TodayForecastPage"
     Title="{l10n:Localization PropertyName=TodayForecastTitle}">
 
@@ -18,217 +17,165 @@
     </views:BasePage.BindingContext>
 
     <views:BasePage.Content>
-        <ScrollView>
-            <StackLayout>
-                <Label HorizontalTextAlignment="Center">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span
-                                Text="{Binding TodayForecastData.Temperature}"
-                                FontSize="Title" />
-                            <Span
-                                Text="{l10n:Localization PropertyName=TemperatureMeasurement}"
-                                FontSize="Title" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+        <Grid
+            ColumnSpacing="0"
+            RowSpacing="0">
 
-                <Label HorizontalTextAlignment="Center">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="{l10n:Localization PropertyName=FeltTemperature}" />
-                            <Span
-                                Text="{Binding TodayForecastData.ApparentTemperature}"
-                                FontSize="Subtitle" />
-                            <Span
-                                Text="{l10n:Localization PropertyName=TemperatureMeasurement}"
-                                FontSize="Subtitle"
-                                FontAttributes="Italic" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+            <Grid.RowDefinitions>
+                <!-- Apparent temperature -->
+                <RowDefinition Height="Auto" />
+                <!-- Real temperature -->
+                <RowDefinition Height="Auto" />
+                <!-- Hourly forecast -->
+                <RowDefinition Height="Auto" />
+                <!-- Summary -->
+                <RowDefinition Height="Auto" />
+                <!-- Weather properties -->
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-                <Label
-                    Text="{Binding TodayForecastData.Summary}"
-                    HorizontalTextAlignment="Center" />
+            <controls:AnimateGradientPageBackgroundView
+                x:Name="PageBackgroundView"
+                x:FieldModifier="private"
+                GradientEndColor="DarkSlateBlue"
+                GradientOrientation="Vertical"
+                GradientStartColor="CornflowerBlue"
+                Grid.RowSpan="5" />
 
-                <CollectionView
-                    SelectionMode="None"
-                    HeightRequest="120"
-                    ItemsSource="{Binding HourlyForecastData}">
+            <Label
+                TextColor="Black"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                FontSize="Header"
+                FontFamily="{x:Static helpers:FontFamilyHelper+Comfortaa.Bold}"
+                Grid.Row="0">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span
+                            Text="{Binding TodayForecastData.Temperature}" />
+                        <Span
+                            Text="{l10n:Localization PropertyName=TemperatureMeasurement}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
 
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <controls:HourlyForecastSmallView />
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
+            <Label
+                TextColor="Black"
+                HorizontalTextAlignment="Center"
+                FontSize="Large"
+                Grid.Row="1">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span
+                            Text="{l10n:Localization PropertyName=FeltTemperature}" />
+                        <Span
+                            Text="{Binding TodayForecastData.ApparentTemperature}" />
+                        <Span
+                            Text="{l10n:Localization PropertyName=TemperatureMeasurement}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
 
-                    <CollectionView.ItemsLayout>
-                        <GridItemsLayout
-                            Orientation="Horizontal"
-                            HorizontalItemSpacing="30" />
-                    </CollectionView.ItemsLayout>
-                </CollectionView>
+            <Label
+                Text="{Binding TodayForecastData.Summary}"
+                HorizontalTextAlignment="Center"
+                Grid.Row="2"
+                FontSize="Subtitle"
+                TextColor="Black" />
 
-                <Label HorizontalTextAlignment="Center">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="{l10n:Localization PropertyName=CloudCover}" />
-                            <Span Text="&#10;" />
-                            <Span
-                                Text="{Binding TodayForecastData.CloudCover, StringFormat='{0:P2}'}"
-                                FontSize="Medium" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+            <BoxView
+                BackgroundColor="White"
+                Opacity="0.75"
+                CornerRadius="20"
+                Margin="20"
+                Grid.Row="3" />
 
-                <Label HorizontalTextAlignment="Center">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="{l10n:Localization PropertyName=DewPoint}" />
-                            <Span Text="&#10;" />
-                            <Span
-                                Text="{Binding TodayForecastData.DewPoint}"
-                                FontSize="Medium" />
-                            <Span Text=" " />
-                            <Span
-                                Text="{l10n:Localization PropertyName=TemperatureMeasurement}"
-                                FontSize="Medium"
-                                FontAttributes="Italic" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+            <CollectionView
+                SelectionMode="None"
+                ItemsSource="{Binding HourlyForecastData}"
+                HeightRequest="120"
+                Margin="30"
+                Grid.Row="3">
 
-                <Label HorizontalTextAlignment="Center">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="{l10n:Localization PropertyName=Humidity}" />
-                            <Span Text="&#10;" />
-                            <Span
-                                Text="{Binding TodayForecastData.Humidity, StringFormat='{0:P2}'}"
-                                FontSize="Medium" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
 
-                <Label HorizontalTextAlignment="Center">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="{l10n:Localization PropertyName=PrecipIntensity}" />
-                            <Span Text="&#10;" />
-                            <Span
-                                Text="{Binding TodayForecastData.PrecipIntensity}"
-                                FontSize="Medium" />
-                            <Span Text=" " />
-                            <Span
-                                Text="{l10n:Localization PropertyName=PrecipIntensityMeasurement}"
-                                FontSize="Medium"
-                                FontAttributes="Italic" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+                            <Grid.Children>
+                                <Label
+                                    Text="{Binding DateTime, StringFormat='{}{0:hh:mm}'}"
+                                    HorizontalTextAlignment="Center"
+                                    Grid.Row="0"
+                                    FontSize="Body"
+                                    TextColor="Black" />
 
-                <Label HorizontalTextAlignment="Center">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="{l10n:Localization PropertyName=PrecipProbability}" />
-                            <Span Text="&#10;" />
-                            <Span
-                                Text="{Binding TodayForecastData.PrecipIntensity, StringFormat='{0:P2}'}"
-                                FontSize="Medium" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+                                <ffimage:CachedImage
+                                    Source="{Binding WeatherIcon, Converter={StaticResource EnumToStringConverter}}"
+                                    HorizontalOptions="Center"
+                                    HeightRequest="60"
+                                    WidthRequest="60"
+                                    Grid.Row="1" />
 
-                <Label Text="{Binding TodayForecastData.PrecipType, StringFormat='PrecipType: {0}'}" />
+                                <Label
+                                    Text="{Binding Temperature}"
+                                    HorizontalTextAlignment="Center"
+                                    FontSize="Body"
+                                    TextColor="Black"
+                                    Grid.Row="2" />
+                            </Grid.Children>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
 
-                <Label HorizontalTextAlignment="Center">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="{l10n:Localization PropertyName=Pressure}" />
-                            <Span Text="&#10;" />
-                            <Span
-                                Text="{Binding TodayForecastData.Pressure}"
-                                FontSize="Medium" />
-                            <Span Text=" " />
-                            <Span
-                                Text="{l10n:Localization PropertyName=PressureMeasurement}"
-                                FontSize="Medium"
-                                FontAttributes="Italic" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout
+                        Orientation="Horizontal"
+                        HorizontalItemSpacing="30" />
+                </CollectionView.ItemsLayout>
+            </CollectionView>
 
-                <Label Text="{Binding TodayForecastData.UvIndex, StringFormat='UvIndex: {0}'}" />
+            <BoxView
+                BackgroundColor="White"
+                Opacity="0.5"
+                CornerRadius="20"
+                Margin="20"
+                Grid.Row="4" />
 
-                <Label HorizontalTextAlignment="Center">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="{l10n:Localization PropertyName=Visibility}" />
-                            <Span Text="&#10;" />
-                            <Span
-                                Text="{Binding TodayForecastData.Visibility}"
-                                FontSize="Medium" />
-                            <Span Text=" " />
-                            <Span
-                                Text="{l10n:Localization PropertyName=DistanceMeasurement}"
-                                FontSize="Medium"
-                                FontAttributes="Italic" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+            <CollectionView
+                SelectionMode="None"
+                VerticalScrollBarVisibility="Never"
+                ItemsSource="{Binding WeatherDetails}"
+                Margin="30"
+                Grid.Row="4"
+                ItemSizingStrategy="MeasureFirstItem">
 
-                <Label HorizontalTextAlignment="Center">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="{l10n:Localization PropertyName=WindBearing}" />
-                            <Span Text="&#10;" />
-                            <Span
-                                Text="{Binding TodayForecastData.WindBearing}"
-                                FontSize="Medium" />
-                            <Span Text=" " />
-                            <Span
-                                Text="°"
-                                FontSize="Medium"
-                                FontAttributes="Italic" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Label
+                            FontFamily="{x:Static helpers:FontFamilyHelper+Comfortaa.Bold}"
+                            Padding="10"
+                            TextColor="Black"
+                            FontSize="Body">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding Item1}" />
+                                    <Span Text=": " />
+                                    <Span Text="{Binding Item2}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
 
-                <Label HorizontalTextAlignment="Center">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="{l10n:Localization PropertyName=WindGust}" />
-                            <Span Text="&#10;" />
-                            <Span
-                                Text="{Binding TodayForecastData.WindGust}"
-                                FontSize="Medium" />
-                            <Span Text=" " />
-                            <Span
-                                Text="{l10n:Localization PropertyName=SpeedMeasurement}"
-                                FontSize="Medium"
-                                FontAttributes="Italic" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-
-                <Label HorizontalTextAlignment="Center">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="{l10n:Localization PropertyName=WindSpeed}" />
-                            <Span Text="&#10;" />
-                            <Span
-                                Text="{Binding TodayForecastData.WindSpeed}"
-                                FontSize="Medium" />
-                            <Span Text=" " />
-                            <Span
-                                Text="{l10n:Localization PropertyName=SpeedMeasurement}"
-                                FontSize="Medium"
-                                FontAttributes="Italic" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-            </StackLayout>
-        </ScrollView>
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+            </CollectionView>
+        </Grid>
     </views:BasePage.Content>
 </views:BasePage>

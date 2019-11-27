@@ -1,6 +1,6 @@
 ﻿using FreeWeatherApp.Enums;
 using FreeWeatherApp.Helpers.Localization;
-using FreeWeatherApp.Helpers.Measures;
+using FreeWeatherApp.Helpers;
 using System;
 using Xamarin.Forms;
 

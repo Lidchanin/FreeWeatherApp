@@ -69,6 +69,11 @@
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <BundleResource Include="Resources\Comfortaa-Bold.ttf" />
+    <BundleResource Include="Resources\Comfortaa-Light.ttf" />
+    <BundleResource Include="Resources\Comfortaa-Medium.ttf" />
+    <BundleResource Include="Resources\Comfortaa-Regular.ttf" />
+    <BundleResource Include="Resources\Comfortaa-SemiBold.ttf" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -136,7 +141,7 @@
     <PackageReference Include="Xamarin.FFImageLoading.Transformations">
       <Version>2.4.11.982</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.3.0.947036" />
+    <PackageReference Include="Xamarin.Forms" Version="4.3.0.991211" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
@@ -194,4 +199,5 @@
   <ItemGroup>
     <BundleResource Include="Resources\icon_cloudy_color.png" />
   </ItemGroup>
+  <ItemGroup />
 </Project>

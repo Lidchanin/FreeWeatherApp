@@ -11,7 +11,16 @@
         {
             base.OnAppearing();
 
-            await ViewModel.GetForecast();
+            PageBackgroundView.StartAnimation();
+
+            await ViewModel.LoadData();
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            PageBackgroundView.CancelAnimation();
         }
     }
 }

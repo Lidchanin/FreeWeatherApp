@@ -1,5 +1,4 @@
 ﻿using FreeWeatherApp.Enums;
-using FreeWeatherApp.Helpers.Measures;
 using System;
 
 namespace FreeWeatherApp.Helpers.Localization.Languages

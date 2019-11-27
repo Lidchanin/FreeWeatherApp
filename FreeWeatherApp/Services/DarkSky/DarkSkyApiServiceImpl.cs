@@ -1,7 +1,6 @@
 ﻿using FreeWeatherApp.Enums;
 using FreeWeatherApp.Helpers;
 using FreeWeatherApp.Helpers.Localization;
-using FreeWeatherApp.Helpers.Measures;
 using FreeWeatherApp.Models;
 using FreeWeatherApp.Models.DarkSky;
 using System;

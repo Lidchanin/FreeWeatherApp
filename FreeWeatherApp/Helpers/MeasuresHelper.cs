@@ -1,6 +1,6 @@
 ﻿using FreeWeatherApp.Enums;
 
-namespace FreeWeatherApp.Helpers.Measures
+namespace FreeWeatherApp.Helpers
 {
     public static class MeasuresHelper
     {
@@ -15,6 +15,7 @@ namespace FreeWeatherApp.Helpers.Measures
         private static MeasurementUnit GetMeasurementUnit()
         {
             var measurementUnit = PreferencesHelper.GetMeasurementUnit();
+
             if (measurementUnit == MeasurementUnit.None)
             {
                 measurementUnit = MeasurementUnit.Us;

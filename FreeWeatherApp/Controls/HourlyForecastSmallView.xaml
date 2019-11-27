@@ -13,7 +13,7 @@
 
     <Grid.Children>
         <Label
-            Text="{Binding DateTime, StringFormat='{}{0:h:mm}'}"
+            Text="{Binding DateTime, StringFormat='{}{0:hh:mm}'}"
             HorizontalTextAlignment="Center"
             Grid.Row="0" />
 
