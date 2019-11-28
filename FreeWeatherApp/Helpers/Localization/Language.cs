@@ -49,6 +49,10 @@ namespace FreeWeatherApp.Helpers.Localization
         public abstract string ChooseLanguage { get; }
         public abstract string ChooseMeasurementUnits { get; }
         public abstract string FeltTemperature { get; }
+        public abstract string NoPrecipitation { get; }
+        public abstract string Rain { get; }
+        public abstract string Sleet { get; }
+        public abstract string Snow { get; }
 
         public abstract string ApparentTemperature { get; }
         public abstract string CloudCover { get; }

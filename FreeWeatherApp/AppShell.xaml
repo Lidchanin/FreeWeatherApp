@@ -3,11 +3,8 @@
 <Shell
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:localization="clr-namespace:FreeWeatherApp.Helpers.Localization;assembly=FreeWeatherApp"
     xmlns:views="clr-namespace:FreeWeatherApp.Views;assembly=FreeWeatherApp"
-    mc:Ignorable="d"
     FlyoutHeaderBehavior="CollapseOnScroll"
     x:Class="FreeWeatherApp.AppShell">
 
@@ -24,7 +21,7 @@
         </Grid>
     </Shell.FlyoutHeader>
 
-    <FlyoutItem
+    <!--<FlyoutItem
         Route="test_page"
         Title="Test page">
         <Tab>
@@ -32,7 +29,7 @@
                 <views:TestPage />
             </ShellContent>
         </Tab>
-    </FlyoutItem>
+    </FlyoutItem>-->
 
     <FlyoutItem
         Route="today_forecast"

@@ -78,6 +78,10 @@ namespace FreeWeatherApp.Helpers.Localization.Languages
         public override string ChooseLanguage { get; } = "Выберите язык";
         public override string ChooseMeasurementUnits { get; } = "Выберите единицы измерения";
         public override string FeltTemperature { get; } = "Ощущается: ";
+        public override string NoPrecipitation { get; } = "Без осадков";
+        public override string Rain { get; } = "Дождь";
+        public override string Sleet { get; } = "Мокрый снег";
+        public override string Snow { get; } = "Снег";
         public override string ApparentTemperature { get; } = "Ощущаемая температура";
         public override string CloudCover { get; } = "Облачность";
         public override string DewPoint { get; } = "Точка росы";

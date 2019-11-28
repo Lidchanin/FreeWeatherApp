@@ -22,66 +22,44 @@
             RowSpacing="0">
 
             <Grid.RowDefinitions>
-                <!-- Apparent temperature -->
                 <RowDefinition Height="Auto" />
-                <!-- Real temperature -->
                 <RowDefinition Height="Auto" />
-                <!-- Hourly forecast -->
                 <RowDefinition Height="Auto" />
-                <!-- Summary -->
                 <RowDefinition Height="Auto" />
-                <!-- Weather properties -->
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <controls:AnimateGradientPageBackgroundView
                 x:Name="PageBackgroundView"
                 x:FieldModifier="private"
-                GradientEndColor="DarkSlateBlue"
                 GradientOrientation="Vertical"
                 GradientStartColor="CornflowerBlue"
+                GradientEndColor="DarkSlateBlue"
                 Grid.RowSpan="5" />
 
             <Label
+                Text="{Binding RealTemperature}"
                 TextColor="Black"
-                HorizontalOptions="Center"
-                HorizontalTextAlignment="Center"
-                FontSize="Header"
                 FontFamily="{x:Static helpers:FontFamilyHelper+Comfortaa.Bold}"
-                Grid.Row="0">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span
-                            Text="{Binding TodayForecastData.Temperature}" />
-                        <Span
-                            Text="{l10n:Localization PropertyName=TemperatureMeasurement}" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
+                FontSize="72"
+                HorizontalTextAlignment="Center"
+                Grid.Row="0" />
 
             <Label
+                Text="{Binding ApparentTemperature}"
                 TextColor="Black"
+                FontFamily="{x:Static helpers:FontFamilyHelper+Comfortaa.Bold}"
+                FontSize="36"
                 HorizontalTextAlignment="Center"
-                FontSize="Large"
-                Grid.Row="1">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span
-                            Text="{l10n:Localization PropertyName=FeltTemperature}" />
-                        <Span
-                            Text="{Binding TodayForecastData.ApparentTemperature}" />
-                        <Span
-                            Text="{l10n:Localization PropertyName=TemperatureMeasurement}" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
+                Grid.Row="1" />
 
             <Label
-                Text="{Binding TodayForecastData.Summary}"
+                Text="{Binding Summary}"
+                TextColor="Black" 
+                FontFamily="{x:Static helpers:FontFamilyHelper+Comfortaa.Bold}"
+                FontSize="20"
                 HorizontalTextAlignment="Center"
-                Grid.Row="2"
-                FontSize="Subtitle"
-                TextColor="Black" />
+                Grid.Row="2"/>
 
             <BoxView
                 BackgroundColor="White"
@@ -93,6 +71,7 @@
             <CollectionView
                 SelectionMode="None"
                 ItemsSource="{Binding HourlyForecastData}"
+                HorizontalScrollBarVisibility="Never"
                 HeightRequest="120"
                 Margin="30"
                 Grid.Row="3">
@@ -108,25 +87,35 @@
 
                             <Grid.Children>
                                 <Label
-                                    Text="{Binding DateTime, StringFormat='{}{0:hh:mm}'}"
-                                    HorizontalTextAlignment="Center"
-                                    Grid.Row="0"
-                                    FontSize="Body"
-                                    TextColor="Black" />
+                                    Text="{Binding DateTime, StringFormat='{}{0:HH:mm}'}"
+                                    TextColor="Black" 
+                                    FontFamily="{x:Static helpers:FontFamilyHelper+Comfortaa.Regular}"
+                                    FontSize="16"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    Grid.Row="0"/>
 
                                 <ffimage:CachedImage
                                     Source="{Binding WeatherIcon, Converter={StaticResource EnumToStringConverter}}"
                                     HorizontalOptions="Center"
-                                    HeightRequest="60"
-                                    WidthRequest="60"
+                                    HeightRequest="50"
+                                    WidthRequest="50"
                                     Grid.Row="1" />
 
                                 <Label
-                                    Text="{Binding Temperature}"
-                                    HorizontalTextAlignment="Center"
-                                    FontSize="Body"
                                     TextColor="Black"
-                                    Grid.Row="2" />
+                                    FontFamily="{x:Static helpers:FontFamilyHelper+Comfortaa.Regular}"
+                                    FontSize="16"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    Grid.Row="2">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding Temperature}" />
+                                            <Span Text="{l10n:Localization PropertyName=TemperatureMeasurement}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
                             </Grid.Children>
                         </Grid>
                     </DataTemplate>
@@ -157,18 +146,11 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Label
-                            FontFamily="{x:Static helpers:FontFamilyHelper+Comfortaa.Bold}"
+                            Text="{Binding .}"
+                            FontFamily="{x:Static helpers:FontFamilyHelper+Comfortaa.Regular}"
                             Padding="10"
                             TextColor="Black"
-                            FontSize="Body">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="{Binding Item1}" />
-                                    <Span Text=": " />
-                                    <Span Text="{Binding Item2}" />
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
+                            FontSize="16" />
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
 
