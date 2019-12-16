@@ -97,5 +97,7 @@ namespace FreeWeatherApp.Helpers.Localization.Languages
         public override string WindBearing { get; } = "Направление ветра";
         public override string WindGust { get; } = "Порыв ветра";
         public override string WindSpeed { get; } = "Скорость ветра";
+        public override string Loading { get; } = "Загрузка...";
+        public override string NoData { get; } = "Нет данных.";
     }
 }

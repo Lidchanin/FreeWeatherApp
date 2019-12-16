@@ -21,5 +21,11 @@
             public const string ClearNightColorIcon = "icon_clear_night_color.png";
             public const string CloudyColorIcon = "icon_cloudy_color.png";
         }
+
+        public static class LottieFiles
+        {
+            public const string NoData = "lottie_no_data.json";
+            public const string Thermometer = "lottie_thermometer.json";
+        }
     }
 }

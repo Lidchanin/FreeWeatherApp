@@ -3,12 +3,12 @@
 <views:BasePage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:controls="clr-namespace:FreeWeatherApp.Controls;assembly=FreeWeatherApp"
     xmlns:l10n="clr-namespace:FreeWeatherApp.Helpers.Localization;assembly=FreeWeatherApp"
+    xmlns:helpers="clr-namespace:FreeWeatherApp.Helpers;assembly=FreeWeatherApp"
     xmlns:viewModels="clr-namespace:FreeWeatherApp.ViewModels;assembly=FreeWeatherApp"
     xmlns:views="clr-namespace:FreeWeatherApp.Views;assembly=FreeWeatherApp"
-    xmlns:controls="clr-namespace:FreeWeatherApp.Controls;assembly=FreeWeatherApp"
-    xmlns:helpers="clr-namespace:FreeWeatherApp.Helpers;assembly=FreeWeatherApp"
-    xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     x:Class="FreeWeatherApp.Views.TodayForecastPage"
     Title="{l10n:Localization PropertyName=TodayForecastTitle}">
 
@@ -55,11 +55,11 @@
 
             <Label
                 Text="{Binding Summary}"
-                TextColor="Black" 
+                TextColor="Black"
                 FontFamily="{x:Static helpers:FontFamilyHelper+Comfortaa.Bold}"
                 FontSize="20"
                 HorizontalTextAlignment="Center"
-                Grid.Row="2"/>
+                Grid.Row="2" />
 
             <BoxView
                 BackgroundColor="White"
@@ -88,12 +88,12 @@
                             <Grid.Children>
                                 <Label
                                     Text="{Binding DateTime, StringFormat='{}{0:HH:mm}'}"
-                                    TextColor="Black" 
+                                    TextColor="Black"
                                     FontFamily="{x:Static helpers:FontFamilyHelper+Comfortaa.Regular}"
                                     FontSize="16"
                                     HorizontalOptions="Center"
                                     VerticalOptions="Center"
-                                    Grid.Row="0"/>
+                                    Grid.Row="0" />
 
                                 <ffimage:CachedImage
                                     Source="{Binding WeatherIcon, Converter={StaticResource EnumToStringConverter}}"
@@ -126,6 +126,15 @@
                         Orientation="Horizontal"
                         HorizontalItemSpacing="30" />
                 </CollectionView.ItemsLayout>
+
+                <CollectionView.EmptyView>
+                    <controls:CustomEmptyView
+                        IsDataLoaded="{Binding IsDataLoaded}"
+                        LoadingText="{l10n:Localization PropertyName=Loading}"
+                        NoDataText="{l10n:Localization PropertyName=NoData}"
+                        LoadingAnimation="{x:Static helpers:FilenameHelper+LottieFiles.Thermometer}"
+                        NoDataAnimation="{x:Static helpers:FilenameHelper+LottieFiles.NoData}" />
+                </CollectionView.EmptyView>
             </CollectionView>
 
             <BoxView
@@ -157,6 +166,15 @@
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical" />
                 </CollectionView.ItemsLayout>
+
+                <CollectionView.EmptyView>
+                    <controls:CustomEmptyView
+                        IsDataLoaded="{Binding IsDataLoaded}"
+                        LoadingText="{l10n:Localization PropertyName=Loading}"
+                        NoDataText="{l10n:Localization PropertyName=NoData}"
+                        LoadingAnimation="{x:Static helpers:FilenameHelper+LottieFiles.Thermometer}"
+                        NoDataAnimation="{x:Static helpers:FilenameHelper+LottieFiles.NoData}" />
+                </CollectionView.EmptyView>
             </CollectionView>
         </Grid>
     </views:BasePage.Content>

@@ -10,6 +10,8 @@ namespace FreeWeatherApp.ViewModels
 {
     public class TodayForecastViewModel : BaseViewModel
     {
+        public bool IsDataLoaded { get; set; }
+
         public string RealTemperature { get; set; }
         public string ApparentTemperature { get; set; }
         public string Summary { get; set; }
@@ -146,6 +148,8 @@ namespace FreeWeatherApp.ViewModels
                     }
                 }
             }
+
+            IsDataLoaded = true;
         }
     }
 }

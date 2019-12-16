@@ -69,5 +69,8 @@ namespace FreeWeatherApp.Helpers.Localization
         public abstract string WindBearing { get; }
         public abstract string WindGust { get; }
         public abstract string WindSpeed { get; }
+
+        public abstract string Loading { get; }
+        public abstract string NoData { get; }
     }
 }

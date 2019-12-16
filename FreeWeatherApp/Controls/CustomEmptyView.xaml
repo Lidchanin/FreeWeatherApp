@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:l10n="clr-namespace:FreeWeatherApp.Helpers.Localization;assembly=FreeWeatherApp"
+    xmlns:helpers="clr-namespace:FreeWeatherApp.Helpers;assembly=FreeWeatherApp"
+    xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+    x:Class="FreeWeatherApp.Controls.CustomEmptyView"
+    x:Name="MainView"
+    x:FieldModifier="private">
+
+    <ContentView.Content>
+        <Grid>
+            <Grid
+                x:Name="NoDataGrid"
+                x:FieldModifier="private"
+                IsVisible="{Binding Source={x:Reference Name=MainView}, Path=IsDataLoaded}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+
+                <forms:AnimationView
+                    Animation="{Binding Source={x:Reference Name=MainView}, Path=NoDataAnimation}"
+                    IsPlaying="{Binding Source={x:Reference Name=NoDataGrid}, Path=IsVisible}"
+                    Loop="True"
+                    Grid.Column="0" />
+
+                <Label
+                    Text="{l10n:Localization PropertyName=NoData}"
+                    FontSize="Large"
+                    TextColor="Black"
+                    FontFamily="{x:Static helpers:FontFamilyHelper+Comfortaa.Bold}"
+                    HorizontalTextAlignment="Start"
+                    VerticalTextAlignment="Center"
+                    Grid.Column="1" />
+            </Grid>
+
+            <Grid
+                x:Name="LoadingGrid"
+                x:FieldModifier="private"
+                IsVisible="{Binding Source={x:Reference Name=MainView}, 
+                                    Path=IsDataLoaded, 
+                                    Converter={StaticResource InverseBooleanConverter}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+
+                <forms:AnimationView
+                    Animation="{Binding Source={x:Reference Name=MainView}, Path=LoadingAnimation}"
+                    IsPlaying="{Binding Source={x:Reference Name=LoadingGrid}, Path=IsVisible}"
+                    Loop="True"
+                    Grid.Column="0" />
+
+                <Label
+                    Text="{l10n:Localization PropertyName=Loading}"
+                    FontSize="Large"
+                    TextColor="Black"
+                    FontFamily="{x:Static helpers:FontFamilyHelper+Comfortaa.Bold}"
+                    HorizontalTextAlignment="Start"
+                    VerticalTextAlignment="Center"
+                    Grid.Column="1" />
+            </Grid>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

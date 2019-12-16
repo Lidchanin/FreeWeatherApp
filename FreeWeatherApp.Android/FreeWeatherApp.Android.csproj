@@ -54,6 +54,9 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie">
+      <Version>3.0.3</Version>
+    </PackageReference>
     <PackageReference Include="PropertyChanged.Fody">
       <Version>3.1.3</Version>
     </PackageReference>
@@ -84,6 +87,7 @@
     <Compile Include="Renderers\GradientColorViewRenderer.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SplashActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Comfortaa-Bold.ttf" />
@@ -91,6 +95,8 @@
     <AndroidAsset Include="Assets\Comfortaa-Medium.ttf" />
     <AndroidAsset Include="Assets\Comfortaa-Regular.ttf" />
     <AndroidAsset Include="Assets\Comfortaa-SemiBold.ttf" />
+    <AndroidAsset Include="Assets\lottie_thermometer.json" />
+    <AndroidAsset Include="Assets\lottie_no_data.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
@@ -172,6 +178,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon_cloudy_color.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\splash_screen.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

@@ -11,6 +11,7 @@
         <!-- #region Converters -->
 
         <converters:EnumToStringConverter x:Key="EnumToStringConverter" />
+        <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
 
         <!-- #endregion Converters -->
 

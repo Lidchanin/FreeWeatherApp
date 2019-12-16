@@ -12,7 +12,6 @@ namespace FreeWeatherApp.Droid
         Label = "FreeWeatherApp",
         Icon = "@mipmap/icon",
         Theme = "@style/MainTheme",
-        MainLauncher = true,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
         ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : FormsAppCompatActivity
